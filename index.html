@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Australia Cause of Death Statistics</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Loading overlay (shown while CSVs fetch) -->
+  <div id="loading-overlay">
+    <div class="loading-inner">
+      <div class="loading-spinner"></div>
+      <div class="loading-text">Loading data…</div>
+      <div class="loading-sub">Australia_Population.csv · Australia_Deaths_Long_Cleaned.csv</div>
+    </div>
+  </div>
+
+  <div class="tooltip" id="tooltip"></div>
+
+  <!-- ── Header ──────────────────────────────────────────────────── -->
+  <header>
+    <div class="header-top">
+      <div>
+        <div class="flag-badge"> Australia · 1981 – 2019</div>
+        <h1>Health <span>Statistics</span><br>Dashboard</h1>
+        <p class="subtitle">Births, Deaths &amp; Causes of Mortality — Interactive Analysis</p>
+      </div>
+      <div class="header-links">
+        <a href="https://www.kaggle.com/code/sythnic/world-death-dataset" target="_blank" rel="noopener">ABS Causes of Death</a>
+        <a href="https://www.kaggle.com/datasets/ivanchvez/causes-of-death-our-world-in-data" target="_blank" rel="noopener">IHME Global Burden of Disease</a>
+        
+        
+      </div>
+    </div>
+  </header>
+
+  <!-- ── Stat cards (rendered by statCards.js) ───────────────────── -->
+  <div class="stat-row" id="stat-row"></div>
+
+  <main class="main">
+
+    <!-- ─── CHART PLACEHOLDERS ─────────────────────────────────────
+         These <div>s define the final layout of the dashboard.
+         Part 2 will inject real D3 charts into each container.
+
+         Placeholder styling is in css/style.css (.chart-placeholder)
+    ──────────────────────────────────────────────────────────────── -->
+
+    <!-- Placeholder 1 — Births vs Deaths -->
+    <div class="panel">
+      <div class="panel-header">
+        <div>
+          <div class="section-title">Births vs. Deaths Over Time</div>
+          <div class="section-desc">Annual totals 1981–2019</div>
+        </div>
+        <!-- TODO (Part 2): activate these buttons via setBirthDeathMode() -->
+        <div class="btn-group">
+          <button class="btn active" disabled>Both</button>
+          <button class="btn"        disabled>Births</button>
+          <button class="btn"        disabled>Deaths</button>
+        </div>
+      </div>
+      <!-- Part 2 renders into this div -->
+      <div id="chart-births-deaths" class="chart-placeholder">
+        <span>📈 Chart renders here in Part 2</span>
+        <code>js/chartBirthDeath.js</code>
+      </div>
+    </div>
+
+    <!-- Placeholder 2 — Cause Trends -->
+    <div class="panel">
+      <div class="panel-header">
+        <div>
+          <div class="section-title">Cause of Death Trends (1990–2019)</div>
+          <div class="section-desc">Multi-line chart with interactive legend</div>
+        </div>
+        <div class="btn-group">
+          <button class="btn" disabled>Top 8</button>
+          <button class="btn" disabled>All</button>
+          <button class="btn" disabled>Clear</button>
+        </div>
+      </div>
+      <div id="chart-cause" class="chart-placeholder">
+        <span>📊 Chart renders here in Part 2</span>
+        <code>js/chartCauseTrends.js</code>
+      </div>
+      <!-- TODO (Part 2): cause legend grid goes here -->
+      <div id="cause-legend"></div>
+    </div>
+
+    <!-- Placeholder 3 — Bar Chart Race -->
+    <div class="panel">
+      <div class="panel-header">
+        <div>
+          <div class="section-title">Bar Chart Race — Top 10 Causes (1990→2019)</div>
+          <div class="section-desc">Animated ranking with Play / Pause / Speed controls</div>
+        </div>
+      </div>
+      <!-- TODO (Part 2): race controls go here (play/pause/reset/speed) -->
+      <div class="race-controls">
+        <button class="btn" disabled>▶ Play</button>
+        <button class="btn" disabled>↺ Reset</button>
+        <span class="race-year-label">1990</span>
+        <div class="race-speed-group">
+          <span class="race-speed-label">Speed:</span>
+          <button class="btn speed-btn active" disabled>1×</button>
+          <button class="btn speed-btn"        disabled>2×</button>
+          <button class="btn speed-btn"        disabled>4×</button>
+        </div>
+      </div>
+      <div class="race-progress-wrap">
+        <div class="race-progress-fill" style="width:0%"></div>
+      </div>
+      <div id="chart-bar" class="chart-placeholder">
+        <span>🏎️ Chart renders here in Part 2</span>
+        <code>js/chartBar.js</code>
+      </div>
+    </div>
+
+    <!-- Placeholder 4 — Alluvial / Sankey -->
+    <div class="panel">
+      <div class="panel-header">
+        <div>
+          <div class="section-title">Alluvial Diagram — How Deaths Flow Over Time</div>
+          <div class="section-desc">Top 10 causes across 7 snapshots with cross-chart highlighting</div>
+        </div>
+      </div>
+      <div id="chart-sankey" class="chart-placeholder">
+        <span>🌊 Chart renders here in Part 2</span>
+        <code>js/chartSankey.js</code>
+      </div>
+    </div>
+
+  </main>
+
+  <footer>
+    Built with D3.js v7 ·
+    Data: Australian Bureau of Statistics (ABS) &amp; IHME Global Burden of Disease
+  </footer>
+
+  <!-- ════════════════════════════════════════════════════════════════
+       Part 1 script load order
+
+         d3  (external)
+         loader.js     ← fetches CSVs, populates DATA, calls initApp()
+         config.js     ← _initConfig(): ALL_CAUSES, CAUSE_COLORS
+         events.js     ← EventBus pub/sub
+         tooltip.js    ← showTooltip / hideTooltip
+         statCards.js  ← buildStatCards()
+         main.js       ← initApp() called by loader.js
+
+       ── TODO (Part 2): add these 5 lines before main.js ────────────
+         <script src="js/legend.js"></script>
+         <script src="js/chartBirthDeath.js"></script>
+         <script src="js/chartCauseTrends.js"></script>
+         <script src="js/chartBar.js"></script>
+         <script src="js/chartSankey.js"></script>
+       ── and replace main.js with Part 2 version ────────────────────
+  ═══════════════════════════════════════════════════════════════════ -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+  <script src="data/loader.js"></script>
+  <script src="js/config.js"></script>
+  <script src="js/events.js"></script>
+  <script src="js/tooltip.js"></script>
+  <script src="js/statCards.js"></script>
+  <script src="js/main.js"></script>
+
+</body>
+</html>
