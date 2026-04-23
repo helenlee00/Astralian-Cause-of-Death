@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Australia Cause of Death Statistics</title>
+  <title>Australia Health Statistics Dashboard</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 </head>
@@ -28,11 +28,11 @@
         <h1>Health <span>Statistics</span><br>Dashboard</h1>
         <p class="subtitle">Births, Deaths &amp; Causes of Mortality — Interactive Analysis</p>
       </div>
-      <div class="header-links">
-        <a href="https://www.kaggle.com/code/sythnic/world-death-dataset" target="_blank" rel="noopener">ABS Causes of Death</a>
-        <a href="https://www.kaggle.com/datasets/ivanchvez/causes-of-death-our-world-in-data" target="_blank" rel="noopener">IHME Global Burden of Disease</a>
-        
-        
+      <div style="display:flex;flex-direction:column;align-items:flex-end;gap:0.4rem">
+     
+
+        <a href="https://www.kaggle.com/code/sythnic/world-death-dataset" target="_blank" class="source-link">ABS Causes of Death</a>
+        <a href="https://www.kaggle.com/datasets/berkayalan/australia-population-births-and-deaths" target="_blank" class="source-link">Australia Birth and Death</a>
       </div>
     </div>
   </header>
@@ -161,12 +161,13 @@
        ── and replace main.js with Part 2 version ────────────────────
   ═══════════════════════════════════════════════════════════════════ -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
-  <script src="data/loader.js"></script>
+  
   <script src="js/config.js"></script>
   <script src="js/events.js"></script>
   <script src="js/tooltip.js"></script>
   <script src="js/statCards.js"></script>
   <script src="js/main.js"></script>
 
+  <script src="data/loader.js"></script>
 </body>
 </html>

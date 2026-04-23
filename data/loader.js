@@ -156,7 +156,9 @@ function _showError(err) {
         </div>
       </div>`;
   }
-  console.error('[loader.js] CSV load failed:', err);
+  window.addEventListener('load', () => {
+    loadData();
+});
 }
 
 /* ── Auto-start ──────────────────────────────────────────────────────── */

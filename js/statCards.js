@@ -24,7 +24,7 @@ function buildStatCards() {
     {
       label : 'Births (2019)',
       value : (last.births / 1000).toFixed(1) + 'K',
-      cls   : 'blue',
+      cls   : 'blue ',
       sub   : `Latest annual births recorded`,
     },
     {
