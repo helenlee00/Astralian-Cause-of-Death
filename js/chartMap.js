@@ -1,7 +1,6 @@
 /**
  * js/chartMap.js
- * Bản đồ Choropleth sử dụng Dữ liệu THẬT (Actual Data 2024) từ ABS.
- */
+ * The Choropleth map uses REAL data (Actual Data 2024) from ABS.
 
 function initMapChart() {
   const container = d3.select("#chart-map");
@@ -16,24 +15,24 @@ function initMapChart() {
     .attr("height", H)
     .attr("viewBox", `0 0 ${W} ${H}`);
 
-  // 1. TÍCH HỢP DỮ LIỆU THỰC TẾ (2024 ABS DATA) BẠN VỪA CUNG CẤP
+  // 1. INTEGRATION OF REAL-WORLD DATA (2024 ABS DATA)
   const stateData = new Map([
-    ["New South Wales", 59641],              // Trích từ Table 2.1
-    ["Victoria", 45943],                     // Trích từ Table 3.1
-    ["Queensland", 38901],                   // Trích từ Table 4.1
-    ["Western Australia", 17969],            // Trích từ Table 6.1
-    ["South Australia", 15739],              // Trích từ Table 5.1
-    ["Tasmania", 5200],                      // Khớp với tổng 187,268 của toàn Úc
+    ["New South Wales", 59641],              // Table 2.1
+    ["Victoria", 45943],                     // Table 3.1
+    ["Queensland", 38901],                   // Table 4.1
+    ["Western Australia", 17969],            // Table 6.1
+    ["South Australia", 15739],              // Table 5.1
+    ["Tasmania", 5200],                      
     ["Australian Capital Territory", 2500],
     ["Northern Territory", 1375]
   ]);
 
-  // 2. TẠO THANG MÀU NHIỆT (Heatmap Color Scale)
-  const maxDeaths = 60000; // Đặt max cứng để màu sắc phân bổ mượt mà
+  // 2. Heatmap Color Scale
+  const maxDeaths = 60000; 
   const colorScale = d3.scaleSequential(d3.interpolateOrRd)
     .domain([0, maxDeaths]); 
 
-  // 3. THIẾT LẬP PROJECTION (Hệ quy chiếu không gian)
+  // 3. ESTABLISHING A PROJECTION (Spatial Reference System)
   const projection = d3.geoMercator()
     .center([133, -28]) 
     .scale(W * 0.9)     
@@ -42,7 +41,7 @@ function initMapChart() {
   const path = d3.geoPath().projection(projection);
   const g = svg.append("g");
 
-  // 4. TẢI BẢN ĐỒ VÀ ĐỔ MÀU THEO DATA THẬT
+  // 4. DOWNLOAD MAPS AND COLOR THEM ACCORDING TO REAL DATA
   const geoUrl = "https://raw.githubusercontent.com/rowanhogan/australian-states/master/states.geojson";
 
   const loadingText = svg.append("text")
@@ -76,7 +75,7 @@ function initMapChart() {
         const stateName = d.properties.STATE_NAME;
         const deaths = stateData.get(stateName) || 0;
         
-        // Tooltip hiện số liệu thực tế
+        // Tooltip displays actual data
         if (typeof showTooltip === 'function') {
           const html = `
             <div class="tooltip-year" style="font-weight:bold; margin-bottom:5px;">${stateName}</div>
@@ -98,7 +97,7 @@ function initMapChart() {
         if (typeof hideTooltip === 'function') hideTooltip();
       });
 
-    // 5. VẼ CHÚ THÍCH MÀU (Legend)
+    // 5. DRAWING COLOR ANNOTATIONS (Legend)
     const legendW = 200, legendH = 10;
     const legendG = svg.append("g")
       .attr("transform", `translate(${W - legendW - 20}, ${H - 40})`);
