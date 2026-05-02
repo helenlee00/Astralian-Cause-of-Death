@@ -1,7 +1,6 @@
 /**
  * js/chartSankey.js  —  Alluvial / Sankey Diagram
  *
- * Phiên bản: Đã fix lỗi + Ép chiều rộng trải dài (Cuộn ngang)
  */
 
 /* ── Constants ───────────────────────────────────────────────────────── */
@@ -27,22 +26,18 @@ function _getTopCauses() {
     .map(d => d.cause);
 }
 
-/* ── Main draw (Đã đổi tên thành initSankeyChart) ────────────────────── */
 function initSankeyChart() {
   const container = document.getElementById('chart-sankey');
   container.innerHTML = '';
   _skG = null;
 
-  // 1. ÉP BẬT THANH CUỘN NGANG NẾU BIỂU ĐỒ QUÁ RỘNG
   container.style.overflowX = "auto";
   container.style.overflowY = "hidden";
 
   _skTopCauses = _getTopCauses();
 
-  // Tăng margin 2 bên để chữ không bị cắt lẹm
   const ML = 180, MR = 180, MT = 36, MB = 32; 
   
-  // 2. ÉP CHIỀU RỘNG (W): Tối thiểu là 1500px, số càng to càng giãn rộng
   const baseW = container.clientWidth || 900;
   const W  = Math.max(baseW, 1500); 
   const w  = W - ML - MR;
@@ -203,7 +198,6 @@ function initSankeyChart() {
     .delay((_, i) => i * 12)
     .attr('opacity', 0.95);
 
-  // Lắng nghe sự kiện Highlight từ các biểu đồ khác
   EventBus.on('highlight', ({ cause }) => highlightSankeyCause(cause));
 }
 
