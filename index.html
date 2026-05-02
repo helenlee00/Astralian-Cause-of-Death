@@ -9,7 +9,6 @@
 </head>
 <body>
 
-  <!-- Loading overlay (shown while CSVs fetch) -->
   <div id="loading-overlay">
     <div class="loading-inner">
       <div class="loading-spinner"></div>
@@ -20,57 +19,42 @@
 
   <div class="tooltip" id="tooltip"></div>
 
-  <!-- ── Header ──────────────────────────────────────────────────── -->
   <header>
     <div class="header-top">
       <div>
-        <div class="flag-badge"> Australia · 1981 – 2019</div>
+        <div class="flag-badge"> Australia · 1981 – 2024</div>
         <h1>Health <span>Statistics</span><br>Dashboard</h1>
         <p class="subtitle">Births, Deaths &amp; Causes of Mortality — Interactive Analysis</p>
       </div>
       <div style="display:flex;flex-direction:column;align-items:flex-end;gap:0.4rem">
-     
-
         <a href="https://www.kaggle.com/code/sythnic/world-death-dataset" target="_blank" class="source-link">ABS Causes of Death</a>
         <a href="https://www.kaggle.com/datasets/berkayalan/australia-population-births-and-deaths" target="_blank" class="source-link">Australia Birth and Death</a>
       </div>
     </div>
   </header>
 
-  <!-- ── Stat cards (rendered by statCards.js) ───────────────────── -->
   <div class="stat-row" id="stat-row"></div>
 
   <main class="main">
 
-    <!-- ─── CHART PLACEHOLDERS ─────────────────────────────────────
-         These <div>s define the final layout of the dashboard.
-         Part 2 will inject real D3 charts into each container.
-
-         Placeholder styling is in css/style.css (.chart-placeholder)
-    ──────────────────────────────────────────────────────────────── -->
-
-    <!-- Placeholder 1 — Births vs Deaths -->
     <div class="panel">
       <div class="panel-header">
         <div>
           <div class="section-title">Births vs. Deaths Over Time</div>
           <div class="section-desc">Annual totals 1981–2019</div>
         </div>
-        <!-- TODO (Part 2): activate these buttons via setBirthDeathMode() -->
         <div class="btn-group">
           <button class="btn active" disabled>Both</button>
           <button class="btn"        disabled>Births</button>
           <button class="btn"        disabled>Deaths</button>
         </div>
       </div>
-      <!-- Part 2 renders into this div -->
       <div id="chart-births-deaths" class="chart-placeholder">
         <span>📈 Chart renders here in Part 2</span>
         <code>js/chartBirthDeath.js</code>
       </div>
     </div>
 
-    <!-- Placeholder 2 — Cause Trends -->
     <div class="panel">
       <div class="panel-header">
         <div>
@@ -87,11 +71,9 @@
         <span>📊 Chart renders here in Part 2</span>
         <code>js/chartCauseTrends.js</code>
       </div>
-      <!-- TODO (Part 2): cause legend grid goes here -->
       <div id="cause-legend"></div>
     </div>
 
-    <!-- Placeholder 3 — Bar Chart Race -->
     <div class="panel">
       <div class="panel-header">
         <div>
@@ -99,7 +81,6 @@
           <div class="section-desc">Animated ranking with Play / Pause / Speed controls</div>
         </div>
       </div>
-      <!-- TODO (Part 2): race controls go here (play/pause/reset/speed) -->
       <div class="race-controls">
         <button class="btn" disabled>▶ Play</button>
         <button class="btn" disabled>↺ Reset</button>
@@ -120,7 +101,6 @@
       </div>
     </div>
 
-    <!-- Placeholder 4 — Alluvial / Sankey -->
     <div class="panel">
       <div class="panel-header">
         <div>
@@ -134,6 +114,22 @@
       </div>
     </div>
 
+    <div class="panel">
+      <div class="panel-header">
+        <div>
+          <div class="section-title">Geographic Distribution (Choropleth Map)</div>
+          <div class="section-desc">Actual Mortality by State (ABS Data 2024)</div>
+        </div>
+        <div class="panel-controls">
+          <span style="font-size: 0.85rem; color: #3fb950; font-weight: 600;">*Official ABS Data 2024</span>
+        </div>
+      </div>
+      <div id="chart-map" class="chart-placeholder" style="height: 500px;">
+        <span>🗺️ Map renders here</span>
+        <code>js/chartMap.js</code>
+      </div>
+    </div>
+
   </main>
 
   <footer>
@@ -141,32 +137,20 @@
     Data: Australian Bureau of Statistics (ABS) &amp; IHME Global Burden of Disease
   </footer>
 
-  <!-- ════════════════════════════════════════════════════════════════
-       Part 1 script load order
-
-         d3  (external)
-         loader.js     ← fetches CSVs, populates DATA, calls initApp()
-         config.js     ← _initConfig(): ALL_CAUSES, CAUSE_COLORS
-         events.js     ← EventBus pub/sub
-         tooltip.js    ← showTooltip / hideTooltip
-         statCards.js  ← buildStatCards()
-         main.js       ← initApp() called by loader.js
-
-       ── TODO (Part 2): add these 5 lines before main.js ────────────
-         <script src="js/legend.js"></script>
-         <script src="js/chartBirthDeath.js"></script>
-         <script src="js/chartCauseTrends.js"></script>
-         <script src="js/chartBar.js"></script>
-         <script src="js/chartSankey.js"></script>
-       ── and replace main.js with Part 2 version ────────────────────
-  ═══════════════════════════════════════════════════════════════════ -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+  <script src="https://unpkg.com/d3-sankey@0.12.3/dist/d3-sankey.min.js"></script>
   
   <script src="js/config.js"></script>
   <script src="js/events.js"></script>
   <script src="js/tooltip.js"></script>
   <script src="js/statCards.js"></script>
-  <script src="js/main.js"></script>
+
+  <script src="js/legend.js"></script>
+  <script src="js/chartBirthDeath.js"></script>
+  <script src="js/chartCauseTrends.js"></script>
+  <script src="js/chartBar.js"></script>
+  <script src="js/chartSankey.js"></script>
+  <script src="js/chartMap.js"></script> <script src="js/main.js"></script>
 
   <script src="data/loader.js"></script>
 </body>
