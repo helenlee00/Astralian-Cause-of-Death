@@ -19,7 +19,7 @@
  * Clear the container and render the births-vs-deaths line chart.
  * Reads `birthDeathMode` from config.js to determine which lines to show.
  */
-function drawBirthDeathChart() {
+function initBirthDeathChart() {
   const container = document.getElementById('chart-births-deaths');
   container.innerHTML = '';
 
@@ -46,9 +46,7 @@ function drawBirthDeathChart() {
     .range([0, w]);
 
   // y-max varies depending on which series are active
-  let yMax = 0;
-  if (birthDeathMode !== 'deaths') yMax = Math.max(yMax, d3.max(data, d => d.births));
-  if (birthDeathMode !== 'births') yMax = Math.max(yMax, d3.max(data, d => d.deaths));
+  const yMax = d3.max(data, d => Math.max(d.births, d.deaths));
 
   const y = d3.scaleLinear()
     .domain([0, yMax * 1.1])
@@ -73,8 +71,11 @@ function drawBirthDeathChart() {
     .call(_styleAxis);
 
   /* ── Lines ──────────────────────────────────────────────────────── */
-  if (birthDeathMode !== 'deaths') _drawSeries(g, data, d => d.births, '#3fb950', x, y, h, w);
-  if (birthDeathMode !== 'births') _drawSeries(g, data, d => d.deaths, '#f85149', x, y, h, w);
+  const birthsGroup = g.append('g').attr('class', 'series-births');
+  const deathsGroup = g.append('g').attr('class', 'series-deaths');
+
+  _drawSeries(birthsGroup, data, d => d.births, '#58a6ff', x, y, h); 
+  _drawSeries(deathsGroup, data, d => d.deaths, '#f85149', x, y, h); 
 
   /* ── Invisible hover overlay ─────────────────────────────────────── */
   const bisect = d3.bisector(d => d.year).left;
@@ -91,12 +92,21 @@ function drawBirthDeathChart() {
       if (!d) return;
 
       _updateHoverLine(g, x(d.year), h);
-      showTooltip(event, _buildTooltipHtml(d));
+      if (typeof showTooltip === 'function') {
+        showTooltip(event, _buildTooltipHtml(d));
+      }
     })
     .on('mouseleave', () => {
       hideTooltip();
       g.selectAll('.hover-line').remove();
     });
+  EventBus.on('birthDeathModeChanged', (mode) => {
+  birthsGroup.transition().duration(300)
+    .style("opacity", (mode === 'both' || mode === 'births') ? 1 : 0.1);
+
+  deathsGroup.transition().duration(300)
+    .style("opacity", (mode === 'both' || mode === 'deaths') ? 1 : 0.1);
+  });
 }
 
 /* ── Private helpers ─────────────────────────────────────────────────── */
@@ -145,7 +155,7 @@ function _updateHoverLine(g, xPos, h) {
   g.append('line').attr('class', 'hover-line')
     .attr('x1', xPos).attr('x2', xPos)
     .attr('y1', 0).attr('y2', h)
-    .attr('stroke', '#58a6ff')
+    .attr('stroke', '#8b949e')
     .attr('stroke-width', 1)
     .attr('stroke-dasharray', '4,3')
     .attr('opacity', 0.6);
@@ -157,7 +167,7 @@ function _updateHoverLine(g, xPos, h) {
  * @returns {string}
  */
 function _buildTooltipHtml(d) {
-  let html = `<div class="tooltip-year">${d.year}</div>`;
+  let html = `<div class="tooltip-year" style="font-weight:bold; margin-bottom:5px;">Year ${d.year}</div>`;
 
   if (birthDeathMode !== 'deaths') {
     html += `<div class="tooltip-row">
@@ -169,13 +179,6 @@ function _buildTooltipHtml(d) {
     html += `<div class="tooltip-row">
       <span class="tooltip-key" style="color:#f85149">Deaths</span>
       <span class="tooltip-val">${d.deaths.toLocaleString()}</span>
-    </div>`;
-  }
-  if (birthDeathMode === 'both') {
-    const surplus = d.births - d.deaths;
-    html += `<div class="tooltip-row">
-      <span class="tooltip-key">Surplus</span>
-      <span class="tooltip-val" style="color:#39d353">+${surplus.toLocaleString()}</span>
     </div>`;
   }
   return html;
@@ -191,23 +194,4 @@ function _styleAxis(sel) {
   sel.selectAll('line').attr('stroke', '#30363d');
 }
 
-/* ── Public mode setter ──────────────────────────────────────────────── */
 
-/**
- * Change the active view mode and redraw the chart.
- * Also updates button active states in the toolbar.
- * @param {string} mode  - 'both' | 'births' | 'deaths'
- * @param {HTMLElement} clickedBtn - The button that triggered the change
- */
-function setBirthDeathMode(mode, clickedBtn) {
-  birthDeathMode = mode;
-
-  // Update active class on sibling buttons
-  const group = clickedBtn.closest('.btn-group');
-  if (group) {
-    group.querySelectorAll('.btn').forEach(b => b.classList.remove('active'));
-    clickedBtn.classList.add('active');
-  }
-
-  drawBirthDeathChart();
-}
