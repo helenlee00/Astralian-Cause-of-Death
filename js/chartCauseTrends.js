@@ -6,7 +6,6 @@ function initCauseTrendsChart() {
   const width = container.node().getBoundingClientRect().width || 800;
   const height = 400;
 
-  // Xóa placeholder và thêm SVG
   container.html(""); 
   const svg = container.append("svg")
     .attr("width", "100%")
@@ -16,7 +15,7 @@ function initCauseTrendsChart() {
   const g = svg.append("g");
   const axisG = svg.append("g");
 
-  // Xác định khoảng X (Năm)
+  // Determine the range X (Years)
   const allYears = Object.values(DATA.causeTrends).flat().map(d => d.year);
   const x = d3.scaleLinear()
     .domain(d3.extent(allYears))
@@ -38,48 +37,46 @@ function initCauseTrendsChart() {
   const line = d3.line()
     .x(d => x(d.year))
     .y(d => y(d.deaths))
-    .curve(d3.curveMonotoneX); // Làm cong mượt đường line
+    .curve(d3.curveMonotoneX); 
 
   function update() {
-    // Lọc ra các line data được hiển thị
+    // Filter out the displayed data lines
     const activeData = Array.from(visibleCauses).map(cause => ({
       cause,
       values: DATA.causeTrends[cause]
     }));
 
-    // Cập nhật trục Y theo max value của các nguyên nhân đang chọn
+    // Update the Y-axis based on the maximum value of the selected causes
     const maxVal = d3.max(activeData, d => d3.max(d.values, v => v.deaths)) || 100;
     y.domain([0, maxVal * 1.05]);
 
     xAxisGroup.transition().duration(500).call(xAxis);
     yAxisGroup.transition().duration(500).call(yAxis);
 
-    // Chuẩn bị các dòng (paths)
+    // Prepare paths
     const paths = g.selectAll(".cause-line").data(activeData, d => d.cause);
 
     // Remove
     paths.exit().transition().duration(300).style("opacity", 0).remove();
 
-    // Add mới
+    // Add new
     const pathsEnter = paths.enter()
       .append("path")
-      .attr("class", d => `cause-line line-${d.cause.replace(/[^a-zA-Z0-9]/g, '')}`) // Thêm class để dễ select
+      .attr("class", d => `cause-line line-${d.cause.replace(/[^a-zA-Z0-9]/g, '')}`) 
       .attr("fill", "none")
       .attr("stroke", d => CAUSE_COLORS(d.cause))
       .attr("stroke-width", 1.5) // Cho nét mỏng lại cho thanh lịch
       .style("opacity", 0)
       .attr("d", d => line(d.values));
 
-    // Update dòng hiện tại
+    // Update 
     pathsEnter.merge(paths)
       .transition().duration(500)
       .style("opacity", 1)
       .attr("d", d => line(d.values));
   }
 
-  // Khởi tạo ban đầu
   update();
 
-  // Ràng buộc cập nhật khi EventBus báo hiệu
   EventBus.on('causesChanged', update);
 }
