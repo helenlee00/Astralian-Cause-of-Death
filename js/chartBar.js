@@ -45,7 +45,17 @@ function initBarChartRace() {
 
   const g = svg.append("g")
     .attr("transform", `translate(${margin.left},${margin.top})`);
-
+  const bigYearLabel = g.append("text")
+    .attr("class", "big-year-label")
+    .attr("x", w)             // Căn lề phải của biểu đồ
+    .attr("y", h)             // Căn lề dưới của biểu đồ
+    .attr("text-anchor", "end")
+    .attr("fill", "#ffffff")  // Màu trắng (hoặc màu text chính của bạn)
+    .style("opacity", 0.1)    // Độ mờ thấp để làm hình mờ (watermark)
+    .style("font-size", "100px") // Kích thước rất to
+    .attr('font-family', 'DM Sans, sans-serif')
+    .style("font-weight", "bold")
+    .text(years[0]);          // Khởi tạo năm đầu tiên
   const x = d3.scaleLinear().range([0, w]);
   const y = d3.scaleBand().range([0, h]).padding(0.15).domain(d3.range(topN));
 
@@ -75,10 +85,9 @@ function initBarChartRace() {
   function update(yearIndex, duration) {
     const year = years[yearIndex];
     const data = yearData.get(year);
+    bigYearLabel.text(year);
 
-    // Update year text and progress bar
-    yearLabel.textContent = year;
-    progressBar.style.width = `${(yearIndex / (years.length - 1)) * 100}%`;
+  
 
     // Update the X-axis to match the current year's highest value.
     x.domain([0, d3.max(data, d => d.value)]);
@@ -96,11 +105,11 @@ function initBarChartRace() {
     bars.enter().append("rect")
       .attr("class", "bar")
       .attr("x", 0)
-      .attr("y", h) // Xuất phát từ đáy
+      .attr("y", h) 
       .attr("width", 0)
       .attr("height", y.bandwidth())
       .attr("fill", d => CAUSE_COLORS(d.cause))
-      .attr("rx", 4) // Bo góc cột
+      .attr("rx", 4) 
       .merge(bars)
       .transition().duration(duration).ease(d3.easeLinear)
       .attr("y", d => y(d.rank))
@@ -198,4 +207,5 @@ function initBarChartRace() {
   });
 
   update(0, 0);
+
 }

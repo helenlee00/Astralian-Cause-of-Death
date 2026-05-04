@@ -1,14 +1,14 @@
 /**
  * js/chartMap.js
  * The Choropleth map uses REAL data (Actual Data 2024) from ABS.
-
+*/
 function initMapChart() {
   const container = d3.select("#chart-map");
   if (container.empty()) return;
   container.html(""); 
 
   const W = container.node().getBoundingClientRect().width || 800;
-  const H = 500;
+  const H = 400;
 
   const svg = container.append("svg")
     .attr("width", "100%")

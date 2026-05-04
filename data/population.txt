@@ -1,0 +1,361 @@
+Year,State,Population
+1981,Australian Capital Territory,228616
+1981,New South Wales,5250413
+1981,Northern Territory,125173
+1981,Queensland,2366876
+1981,South Australia,1321727
+1981,Tasmania,427811
+1981,Victoria,3957549
+1981,Western Australia,1310520
+1982,Australian Capital Territory,233202
+1982,New South Wales,5308442
+1982,Northern Territory,131052
+1982,Queensland,2432582
+1982,South Australia,1332913
+1982,Tasmania,430143
+1982,Victoria,3997278
+1982,Western Australia,1342916
+1983,Australian Capital Territory,239497
+1983,New South Wales,5358911
+1983,Northern Territory,136976
+1983,Queensland,2487162
+1983,South Australia,1347682
+1983,Tasmania,433370
+1983,Victoria,4040160
+1983,Western Australia,1371795
+1984,Australian Capital Territory,245483
+1984,New South Wales,5410049
+1984,Northern Territory,143012
+1984,Queensland,2530089
+1984,South Australia,1361126
+1984,Tasmania,438218
+1984,Victoria,4081722
+1984,Western Australia,1394491
+1985,Australian Capital Territory,252396
+1985,New South Wales,5472696
+1985,Northern Territory,149538
+1985,Queensland,2577784
+1985,South Australia,1372520
+1985,Tasmania,443069
+1985,Victoria,4125006
+1985,Western Australia,1423303
+1986,Australian Capital Territory,259732
+1986,New South Wales,5543020
+1986,Northern Territory,154964
+1986,Queensland,2630014
+1986,South Australia,1383802
+1986,Tasmania,446939
+1986,Victoria,4166923
+1986,Western Australia,1463021
+1987,Australian Capital Territory,266423
+1987,New South Wales,5629765
+1987,Northern Territory,158540
+1987,Queensland,2682352
+1987,South Australia,1394526
+1987,Tasmania,449254
+1987,Victoria,4216544
+1987,Western Australia,1500450
+1988,Australian Capital Territory,272570
+1988,New South Wales,5719823
+1988,Northern Territory,159581
+1988,Queensland,2751289
+1988,South Australia,1407066
+1988,Tasmania,451602
+1988,Victoria,4272058
+1988,Western Australia,1541925
+1989,Australian Capital Territory,277247
+1989,New South Wales,5783677
+1989,Northern Territory,161500
+1989,Queensland,2836384
+1989,South Australia,1420775
+1989,Tasmania,456108
+1989,Victoria,4327976
+1989,Western Australia,1583139
+1990,Australian Capital Territory,282888
+1990,New South Wales,5841051
+1990,Northern Territory,163926
+1990,Queensland,2906426
+1990,South Australia,1433994
+1990,Tasmania,462562
+1990,Victoria,4383758
+1990,Western Australia,1615812
+1991,Australian Capital Territory,289665
+1991,New South Wales,5906691
+1991,Northern Territory,166152
+1991,Queensland,2968722
+1991,South Australia,1447392
+1991,Tasmania,467239
+1991,Victoria,4424569
+1991,Western Australia,1639394
+1992,Australian Capital Territory,295244
+1992,New South Wales,5963196
+1992,Northern Territory,169046
+1992,Queensland,3032952
+1992,South Australia,1455755
+1992,Tasmania,470278
+1992,Victoria,4452103
+1992,Western Australia,1661514
+1993,Australian Capital Territory,299869
+1993,New South Wales,6003827
+1993,Northern Territory,172375
+1993,Queensland,3106086
+1993,South Australia,1459484
+1993,Tasmania,472352
+1993,Victoria,4464391
+1993,Western Australia,1682073
+1994,Australian Capital Territory,302508
+1994,New South Wales,6054211
+1994,Northern Territory,175362
+1994,Queensland,3175239
+1994,South Australia,1463334
+1994,Tasmania,473672
+1994,Victoria,4476646
+1994,Western Australia,1708813
+1995,Australian Capital Territory,306282
+1995,New South Wales,6115522
+1995,Northern Territory,180455
+1995,Queensland,3245638
+1995,South Australia,1465617
+1995,Tasmania,474754
+1995,Victoria,4503172
+1995,Western Australia,1740174
+1996,Australian Capital Territory,309756
+1996,New South Wales,6186766
+1996,Northern Territory,185486
+1996,Queensland,3310469
+1996,South Australia,1469838
+1996,Tasmania,475537
+1996,Victoria,4539985
+1996,Western Australia,1772165
+1997,Australian Capital Territory,310496
+1997,New South Wales,6254101
+1997,Northern Territory,189983
+1997,Queensland,3362193
+1997,South Australia,1476618
+1997,Tasmania,474774
+1997,Victoria,4574746
+1997,Western Australia,1801854
+1998,Australian Capital Territory,311648
+1998,New South Wales,6315990
+1998,Northern Territory,193265
+1998,Queensland,3410387
+1998,South Australia,1484257
+1998,Tasmania,473573
+1998,Victoria,4613624
+1998,Western Australia,1830508
+1999,Australian Capital Territory,314475
+1999,New South Wales,6384682
+1999,Northern Territory,196457
+1999,Queensland,3460891
+1999,South Australia,1492228
+1999,Tasmania,473174
+1999,Victoria,4660205
+1999,Western Australia,1857634
+2000,Australian Capital Territory,317746
+2000,New South Wales,6457270
+2000,Northern Territory,199328
+2000,Queensland,3516930
+2000,South Australia,1498348
+2000,Tasmania,473165
+2000,Victoria,4712229
+2000,Western Australia,1883020
+2001,Australian Capital Territory,321720
+2001,New South Wales,6536892
+2001,Northern Territory,201570
+2001,Queensland,3582527
+2001,South Australia,1504644
+2001,Tasmania,473688
+2001,Victoria,4770901
+2001,Western Australia,1909384
+2002,Australian Capital Territory,325005
+2002,New South Wales,6586551
+2002,Northern Territory,201937
+2002,Queensland,3665559
+2002,South Australia,1512741
+2002,Tasmania,474748
+2002,Victoria,4825530
+2002,Western Australia,1931258
+2003,Australian Capital Territory,327356
+2003,New South Wales,6624618
+2003,Northern Territory,201570
+2003,Queensland,3755007
+2003,South Australia,1521472
+2003,Tasmania,479338
+2003,Victoria,4881506
+2003,Western Australia,1956283
+2004,Australian Capital Territory,329032
+2004,New South Wales,6657159
+2004,Northern Territory,203014
+2004,Queensland,3840774
+2004,South Australia,1529566
+2004,Tasmania,483682
+2004,Victoria,4936431
+2004,Western Australia,1983610
+2005,Australian Capital Territory,331999
+2005,New South Wales,6701133
+2005,Northern Territory,206236
+2005,Queensland,3930028
+2005,South Australia,1540614
+2005,Tasmania,486737
+2005,Victoria,4999258
+2005,Western Australia,2016536
+2006,Australian Capital Territory,336099
+2006,New South Wales,6757628
+2006,Northern Territory,209679
+2006,Queensland,4020768
+2006,South Australia,1555324
+2006,Tasmania,490078
+2006,Victoria,5074258
+2006,Western Australia,2058482
+2007,Australian Capital Territory,342676
+2007,New South Wales,6848276
+2007,Northern Territory,214480
+2007,Queensland,4122624
+2007,South Australia,1572713
+2007,Tasmania,494073
+2007,Victoria,5166404
+2007,Western Australia,2113888
+2008,Australian Capital Territory,348872
+2008,New South Wales,6959386
+2008,Northern Territory,220444
+2008,Queensland,4233632
+2008,South Australia,1591170
+2008,Tasmania,499489
+2008,Victoria,5272302
+2008,Western Australia,2181940
+2009,Australian Capital Territory,355576
+2009,New South Wales,7066714
+2009,Northern Territory,226247
+2009,Queensland,4337991
+2009,South Australia,1611554
+2009,Tasmania,504928
+2009,Victoria,5384432
+2009,Western Australia,2246417
+2010,Australian Capital Territory,362450
+2010,New South Wales,7153816
+2010,Northern Territory,229784
+2010,Queensland,4412724
+2010,South Australia,1628517
+2010,Tasmania,509182
+2010,Victoria,5470174
+2010,Western Australia,2298478
+2011,Australian Capital Territory,369170
+2011,New South Wales,7230379
+2011,Northern Territory,231762
+2011,Queensland,4487876
+2011,South Australia,1641740
+2011,Tasmania,511588
+2011,Victoria,5553669
+2011,Western Australia,2361645
+2012,Australian Capital Territory,377448
+2012,New South Wales,7317507
+2012,Northern Territory,236609
+2012,Queensland,4579426
+2012,South Australia,1658180
+2012,Tasmania,511778
+2012,Victoria,5666613
+2012,Western Australia,2433495
+2013,Australian Capital Territory,384087
+2013,New South Wales,7418208
+2013,Northern Territory,241608
+2013,Queensland,4660869
+2013,South Australia,1673227
+2013,Tasmania,512499
+2013,Victoria,5788667
+2013,Western Australia,2490165
+2014,Australian Capital Territory,389906
+2014,New South Wales,7523659
+2014,Northern Territory,242910
+2014,Queensland,4726679
+2014,South Australia,1688432
+2014,Tasmania,513810
+2014,Victoria,5912285
+2014,Western Australia,2520706
+2015,Australian Capital Territory,396680
+2015,New South Wales,7632156
+2015,Northern Territory,244103
+2015,Queensland,4784646
+2015,South Australia,1702185
+2015,Tasmania,515330
+2015,Victoria,6042034
+2015,Western Australia,2542632
+2016,Australian Capital Territory,404924
+2016,New South Wales,7750952
+2016,Northern Territory,245703
+2016,Queensland,4854983
+2016,South Australia,1715008
+2016,Tasmania,518990
+2016,Victoria,6188358
+2016,Western Australia,2561146
+2017,Australian Capital Territory,416563
+2017,New South Wales,7868619
+2017,Northern Territory,247005
+2017,Queensland,4934711
+2017,South Australia,1730659
+2017,Tasmania,528062
+2017,Victoria,6318222
+2017,Western Australia,2589766
+2018,Australian Capital Territory,427266
+2018,New South Wales,7969313
+2018,Northern Territory,246674
+2018,Queensland,5016639
+2018,South Australia,1748989
+2018,Tasmania,538803
+2018,Victoria,6439074
+2018,Western Australia,2623159
+2019,Australian Capital Territory,437108
+2019,New South Wales,8059862
+2019,Northern Territory,246366
+2019,Queensland,5099858
+2019,South Australia,1770804
+2019,Tasmania,549233
+2019,Victoria,6553492
+2019,Western Australia,2668078
+2020,Australian Capital Territory,445334
+2020,New South Wales,8103954
+2020,Northern Territory,247493
+2020,Queensland,5169330
+2020,South Australia,1791224
+2020,Tasmania,558715
+2020,Victoria,6597578
+2020,Western Australia,2716862
+2021,Australian Capital Territory,452871
+2021,New South Wales,8100963
+2021,Northern Territory,249075
+2021,Queensland,5223766
+2021,South Australia,1803204
+2021,Tasmania,567379
+2021,Victoria,6550313
+2021,Western Australia,2751823
+2022,Australian Capital Territory,462676
+2022,New South Wales,8205814
+2022,Northern Territory,253726
+2022,Queensland,5328345
+2022,South Australia,1829211
+2022,Tasmania,572454
+2022,Victoria,6641224
+2022,Western Australia,2806946
+2023,Australian Capital Territory,472301
+2023,New South Wales,8379347
+2023,Northern Territory,257915
+2023,Queensland,5467118
+2023,South Australia,1861339
+2023,Tasmania,573900
+2023,Victoria,6820288
+2023,Western Australia,2903321
+2024,Australian Capital Territory,479196
+2024,New South Wales,8506332
+2024,Northern Territory,261283
+2024,Queensland,5583888
+2024,South Australia,1884815
+2024,Tasmania,575068
+2024,Victoria,6966958
+2024,Western Australia,2986742
+2025,Australian Capital Territory,484728
+2025,New South Wales,8597041
+2025,Northern Territory,264625
+2025,Queensland,5670223
+2025,South Australia,1903276
+2025,Tasmania,576329
+2025,Victoria,7076259
+2025,Western Australia,3045787

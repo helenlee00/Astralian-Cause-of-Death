@@ -32,48 +32,52 @@
       </div>
     </div>
   </header>
-
+<!-- ── Stat cards ──────────────────────────────────────────────── -->
   <div class="stat-row" id="stat-row"></div>
-
+<!-- ── Main ────────────────────────────────────────────────────── -->
   <main class="main">
-
-    <div class="panel">
+<!-- 1. Births vs Deaths -->
+   <div class="panel">
       <div class="panel-header">
         <div>
           <div class="section-title">Births vs. Deaths Over Time</div>
-          <div class="section-desc">Annual totals 1981–2019</div>
+          <div class="section-desc">Annual totals 1981–2019 — hover for details</div>
         </div>
         <div class="btn-group">
-          <button class="btn active" disabled>Both</button>
-          <button class="btn"        disabled>Births</button>
-          <button class="btn"        disabled>Deaths</button>
+          <button class="btn active" onclick="setBirthDeathMode('both',this)">Both</button>
+          <button class="btn"        onclick="setBirthDeathMode('births',this)">Births</button>
+          <button class="btn"        onclick="setBirthDeathMode('deaths',this)">Deaths</button>
         </div>
       </div>
-      <div id="chart-births-deaths" class="chart-placeholder">
-        <span>📈 Chart renders here in Part 2</span>
-        <code>js/chartBirthDeath.js</code>
+      <div id="chart-births-deaths"></div>
+      <div style="display:flex;gap:1.2rem;margin-top:0.8rem;font-size:0.75rem;">
+        <div style="display:flex;align-items:center;gap:0.4rem">
+          <div style="width:24px;height:3px;background:#3fb950;border-radius:2px"></div>
+          <span style="color:var(--muted)">Births</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:0.4rem">
+          <div style="width:24px;height:3px;background:#f85149;border-radius:2px"></div>
+          <span style="color:var(--muted)">Deaths</span>
+        </div>
       </div>
     </div>
-
-    <div class="panel">
+    <!-- 2. Cause trends -->
+ <div class="panel">
       <div class="panel-header">
         <div>
           <div class="section-title">Cause of Death Trends (1990–2019)</div>
-          <div class="section-desc">Multi-line chart with interactive legend</div>
+          <div class="section-desc">Hover a line or legend item to highlight across all charts</div>
         </div>
         <div class="btn-group">
-          <button class="btn" disabled>Top 8</button>
-          <button class="btn" disabled>All</button>
-          <button class="btn" disabled>Clear</button>
+          <button class="btn" onclick="selectTopCauses()">Top 8</button>
+          <button class="btn" onclick="selectAllCauses()">All</button>
+          <button class="btn" onclick="clearCauses()">Clear</button>
         </div>
       </div>
-      <div id="chart-cause" class="chart-placeholder">
-        <span>📊 Chart renders here in Part 2</span>
-        <code>js/chartCauseTrends.js</code>
-      </div>
-      <div id="cause-legend"></div>
+      <div id="chart-cause"></div>
+      <div class="cause-grid-legend" id="cause-legend"></div>
     </div>
-
+   <!-- 3. Bar Chart Race -->
     <div class="panel">
       <div class="panel-header">
         <div>
@@ -82,25 +86,22 @@
         </div>
       </div>
       <div class="race-controls">
-        <button class="btn" disabled>▶ Play</button>
-        <button class="btn" disabled>↺ Reset</button>
-        <span class="race-year-label">1990</span>
+        <button class="btn" id="race-play-btn">▶ Play</button>
+        <button class="btn" id="race-reset-btn">↺ Reset</button>
+        
         <div class="race-speed-group">
           <span class="race-speed-label">Speed:</span>
-          <button class="btn speed-btn active" disabled>1×</button>
-          <button class="btn speed-btn"        disabled>2×</button>
-          <button class="btn speed-btn"        disabled>4×</button>
+          <button class="btn speed-btn active" data-speed="320">1×</button>
+          <button class="btn speed-btn"        data-speed="160">2×</button>
+          <button class="btn speed-btn"        data-speed="80" >4×</button>
         </div>
       </div>
       <div class="race-progress-wrap">
-        <div class="race-progress-fill" style="width:0%"></div>
+        <div class="race-progress-fill" id="race-progress-fill"></div>
       </div>
-      <div id="chart-bar" class="chart-placeholder">
-        <span>🏎️ Chart renders here in Part 2</span>
-        <code>js/chartBar.js</code>
-      </div>
+      <div id="chart-bar" ></div>
     </div>
-
+ <!-- 4. Alluvial / Sankey -->
     <div class="panel">
       <div class="panel-header">
         <div>
@@ -108,26 +109,41 @@
           <div class="section-desc">Top 10 causes across 7 snapshots with cross-chart highlighting</div>
         </div>
       </div>
-      <div id="chart-sankey" class="chart-placeholder">
-        <span>🌊 Chart renders here in Part 2</span>
-        <code>js/chartSankey.js</code>
-      </div>
+      <div id="chart-sankey" ></div>
     </div>
-
+ <!-- 5. Choropleth Map --
     <div class="panel">
       <div class="panel-header">
         <div>
           <div class="section-title">Geographic Distribution (Choropleth Map)</div>
           <div class="section-desc">Actual Mortality by State (ABS Data 2024)</div>
         </div>
-        <div class="panel-controls">
-          <span style="font-size: 0.85rem; color: #3fb950; font-weight: 600;">*Official ABS Data 2024</span>
+        <span style="font-size:0.85rem;color:#3fb950;font-weight:600;">*Official ABS Data 2024</span>
+      </div>
+      <div id="chart-map" style="height:500px;"></div>
+    </div>
+  -->
+    <!-- 6. Bubble Chart -->
+    <div class="panel">
+      <div class="panel-header">
+        <div>
+          <div class="section-title">Population vs. Deaths by State (1990–2019)</div>
+          <div class="section-desc">
+            X = state population · Y = estimated deaths · Color = state ·
+            Deaths estimated proportionally from national total · Dashed line = OLS trend
+          </div>
+        </div>
+        <div class="btn-group">
+          <button class="btn" id="bubble-trail-btn" onclick="toggleBubbleTrail(this)">Show Trails</button>
         </div>
       </div>
-      <div id="chart-map" class="chart-placeholder" style="height: 500px;">
-        <span>🗺️ Map renders here</span>
-        <code>js/chartMap.js</code>
+      <div class="slider-container" style="margin-bottom:1rem;">
+        <span class="slider-label">Year:</span>
+        <span class="year-display" id="bubble-year-label">2019</span>
+        <input type="range" id="bubble-year-slider" min="1990" max="2019" value="2019" step="1">
       </div>
+      <div id="chart-bubble"></div>
+      <div class="bubble-state-legend" id="bubble-legend"></div>
     </div>
 
   </main>
@@ -138,8 +154,7 @@
   </footer>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
-  <script src="https://unpkg.com/d3-sankey@0.12.3/dist/d3-sankey.min.js"></script>
-  
+  <script src="data/loader.js"></script>
   <script src="js/config.js"></script>
   <script src="js/events.js"></script>
   <script src="js/tooltip.js"></script>
@@ -150,8 +165,9 @@
   <script src="js/chartCauseTrends.js"></script>
   <script src="js/chartBar.js"></script>
   <script src="js/chartSankey.js"></script>
-  <script src="js/chartMap.js"></script> <script src="js/main.js"></script>
 
-  <script src="data/loader.js"></script>
+  <script src="js/chartBubble.js"></script>
+  <script src="js/main.js"></script>
+  
 </body>
 </html>

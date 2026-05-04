@@ -37,15 +37,18 @@ async function loadData() {
   try {
     _showLoadingState(true);
 
-    const [popRows, deathRows] = await Promise.all([
+    const [popRows, deathRows,stateRows] = await Promise.all([
       // Population CSV uses semicolons as delimiter
       d3.dsv(';', 'data/Australia_Population.csv'),
       d3.csv('data/Australia_Deaths_Long_Cleaned.csv'),
+      d3.csv('data/population.txt'),
     ]);
 
     window.DATA = {
       population:  _parsePopulation(popRows),
       causeTrends: _parseDeaths(deathRows),
+      nationalDeathsByYear: _parseNationalDeaths(deathRows),
+      statePopulation: _parseStatePopulation(stateRows),
     };
 
     _showLoadingState(false);
@@ -125,7 +128,34 @@ function _parseDeaths(rows) {
 
   return causeTrends;
 }
+function _parseNationalDeaths(rows){
+  const byYear ={}
+  rows.forEach (row => {
+    const year = parseInt(row['Date'], 10);
+    const total = parseFloat(row['Total_Deaths']) || 0;
 
+    if(!isNaN(year)&& total && !byYear[year]) {
+      byYear[year] = total;
+    }
+  });
+  return byYear;
+}
+function _parseStatePopulation(rows){
+  return rows
+    .map(row => {
+      const yearKey = Object.keys(row).find(
+        k => k.trim().replace(/^\uFEFF/, '') === 'Year'
+      );
+      const year       = parseInt(row[yearKey] || row['Year'], 10);
+      const state      = (row['State'] || '').trim();
+      const population = parseInt(row['Population'], 10) || 0;
+
+      if (isNaN(year) || !state) return null;
+      return { year, state, population };
+    })
+    .filter(Boolean)  // remove null rows
+    .sort((a, b) => a.year - b.year || a.state.localeCompare(b.state));
+  }
 /* ── Loading / error UI ──────────────────────────────────────────────── */
 
 function _showLoadingState(visible) {
@@ -142,7 +172,7 @@ function _showError(err) {
       <div style="text-align:center;padding:2rem;">
         <div style="font-size:2rem;margin-bottom:1rem;">⚠️</div>
         <div style="color:#f85149;font-weight:700;font-size:1rem;margin-bottom:0.5rem;">
-          Failed to load CSV files
+          Failed to load data files
         </div>
         <div style="color:#7d8590;font-size:0.82rem;max-width:420px;line-height:1.6;">
           This dashboard must be served via a local HTTP server.<br>
@@ -151,14 +181,10 @@ function _showError(err) {
           <code style="background:#1c2330;padding:0.3rem 0.6rem;border-radius:4px;margin-top:0.4rem;display:inline-block;">npx serve .</code><br><br>
           <span style="color:#58a6ff;">Then open: http://localhost:8000</span>
         </div>
-        <div style="color:#3d4450;font-size:0.72rem;margin-top:1rem;">
-          ${err.message || err}
-        </div>
+        <div style="color:#3d4450;font-size:0.72rem;margin-top:1rem;">${err.message || err}</div>
       </div>`;
   }
-  window.addEventListener('load', () => {
-    loadData();
-});
+  console.error('[loader.js] Data load failed:', err);
 }
 
 /* ── Auto-start ──────────────────────────────────────────────────────── */

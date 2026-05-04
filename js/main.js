@@ -1,62 +1,97 @@
 /**
- * js/main.js  —  Part 1: Data + Layout + Utilities
+ * js/main.js  —  Application entry point
  *
- * Entry point for Part 1. Called by data/loader.js after both CSVs
- * are loaded and window.DATA is ready.
- *   Initialise config (color scale, cause list)
- *   Render stat cards
- *   Show chart placeholder sections in the UI
+ * Defines initApp() which is called by data/loader.js AFTER both CSV
+ * files have been loaded and window.DATA has been populated.
+ *
+ * This file must be loaded AFTER loader.js because loader.js calls
+ * initApp() synchronously at the end of its async chain.
+ *
+ * Script load order in index.html:
+ *   d3 → loader.js → config.js → events.js → tooltip.js
+ *   → statCards.js → legend.js
+ *   → chartBirthDeath.js → chartCauseTrends.js → chartBar.js
+ *   → chartSankey.js → main.js
+ *
+ * NOTE: loader.js calls loadData() immediately on parse, which is async.
+ * By the time the browser reaches main.js (the last script tag), the
+ * fetch may still be in-flight — that's fine because initApp() is only
+ * called from inside the resolved Promise in loader.js, not on parse.
+ */
+
+/**
+ * Called by loader.js after DATA is ready.
+ * Initialises all components and wires up events.
  */
 function initApp() {
 
-  /* ── Build ALL_CAUSES, CAUSE_COLORS now that DATA is loaded ───── */
+  /* ── Config depends on DATA — re-initialise now that DATA exists ── */
   _initConfig();
-  // Set to display the top 8 causes by default
-  visibleCauses.clear();
-  TOP_8_CAUSES.forEach(c => visibleCauses.add(c));
 
-  // 2. Render Stat Cards 
-  if (typeof buildStatCards === 'function') buildStatCards();
+  /* ── Initial renders ──────────────────────────────────────────── */
 
-  // 3. Initialize the charts
-  if (typeof initBirthDeathChart === 'function') initBirthDeathChart();
-  if (typeof initLegend === 'function') initLegend();
-  if (typeof initCauseTrendsChart === 'function') initCauseTrendsChart();
-  if (typeof initBarChartRace === 'function') initBarChartRace();
-  if (typeof initSankeyChart === 'function') initSankeyChart();
-  if (typeof initMapChart === 'function') initMapChart();
+        
+  buildStatCards();
+  initBirthDeathChart();     // was: drawBirthDeathChart()
+  buildLegend();              // was: selectTopCauses() — initialises legend + wires causesChanged event
+  initCauseTrendsChart();    // was: drawCauseChart()
+  initBarChartRace();        // was: initBarRace()
+  initSankeyChart();         // was: drawSankey()
+  //initMapChart();
+  drawBubbleChart();
+       // ← population vs deaths bubble chart
 
-  // 4. Assign events to the Births vs Deaths controls
-  const bdPanel = document.querySelector('#chart-births-deaths').parentElement;
-  const bdButtons = bdPanel.querySelectorAll('.btn');
-  bdButtons.forEach(btn => {
-    btn.removeAttribute('disabled');
-    btn.addEventListener('click', (e) => {
-      bdButtons.forEach(b => b.classList.remove('active'));
-      e.target.classList.add('active');
-      birthDeathMode = e.target.textContent.toLowerCase();
-      EventBus.emit('birthDeathModeChanged', birthDeathMode); 
+  /* ── Cross-chart EventBus subscriptions ──────────────────────── */
+ EventBus.on('highlight', ({ cause }) => {
+    // Guard: only call if function exists (not yet implemented in some files)
+    if (typeof highlightCauseLines  === 'function') highlightCauseLines(cause);
+    if (typeof highlightRaceBars    === 'function') highlightRaceBars(cause);
+    if (typeof highlightSankeyCause === 'function') highlightSankeyCause(cause);
+  });
+
+  /* ── Bar race controls ────────────────────────────────────────── */
+ document.getElementById('race-play-btn')
+    ?.addEventListener('click', () => {
+      const btn = document.getElementById('race-play-btn');
+      // Guard: use whichever play/pause functions exist
+      if (btn.classList.contains('active')) {
+        if (typeof pauseBarRace === 'function') pauseBarRace();
+        else if (typeof pauseBarChartRace === 'function') pauseBarChartRace();
+      } else {
+        if (typeof playBarRace === 'function') playBarRace();
+        else if (typeof playBarChartRace === 'function') playBarChartRace();
+      }
     });
-  });
 
-  // 5. Assign events to the Cause Trends controls
-  const causePanel = document.querySelector('#chart-cause').parentElement;
-  const causeButtons = causePanel.querySelectorAll('.btn');
-  causeButtons.forEach(btn => btn.removeAttribute('disabled'));
+  document.getElementById('race-reset-btn')
+    ?.addEventListener('click', () => {
+      if (typeof resetBarRace === 'function') resetBarRace();
+      else if (typeof resetBarChartRace === 'function') resetBarChartRace();
+    });
 
-  causeButtons[0].addEventListener('click', () => { // Top 8
-    visibleCauses.clear();
-    TOP_8_CAUSES.forEach(c => visibleCauses.add(c));
-    EventBus.emit('causesChanged');
-  });
+  document.querySelectorAll('.speed-btn').forEach(btn =>
+    btn.addEventListener('click', () => {
+      if (typeof setRaceSpeed === 'function') setRaceSpeed(+btn.dataset.speed);
+    })
+  );
 
-  causeButtons[1].addEventListener('click', () => { // All
-    ALL_CAUSES.forEach(c => visibleCauses.add(c));
-    EventBus.emit('causesChanged');
-  });
+  /* ── Bubble chart year slider ─────────────────────────────────── */
+  document.getElementById('bubble-year-slider')
+    ?.addEventListener('input', function () {
+      setBubbleYear(parseInt(this.value, 10));
+    });
 
-  causeButtons[2].addEventListener('click', () => { // Clear
-    visibleCauses.clear();
-    EventBus.emit('causesChanged');
+  /* ── Responsive redraws (debounced 150ms) ─────────────────────── */
+  let resizeTimer;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+      initBirthDeathChart();
+      initCauseTrendsChart();
+      initSankeyChart();
+      drawBubbleChart();
+      // Bar race: reinit only if function exists
+      if (typeof initBarChartRace === 'function') initBarChartRace();
+    }, 150);
   });
 }

@@ -251,6 +251,12 @@ h1 span { color: var(--accent); }
   flex-wrap: wrap; gap: 0.6rem;
   margin-bottom: 1rem;
 }
+.big-year-label {
+  
+  pointer-events: none; /* Đảm bảo không cản trở chuột khi rê vào các cột */
+  user-select: none;
+  transition: all 0.3s ease-in-out;
+}
 
 .race-speed-group {
   display: flex; align-items: center; gap: 0.4rem;
@@ -305,6 +311,22 @@ footer {
   border-top: 1px solid var(--border); margin-top: 1rem;
 }
 
+/* ── 12. Bubble chart ────────────────────────────────────────────────── */
+#chart-bubble { width: 100%; }
+
+.b-bubble { transition: opacity 0.15s, r 0.15s; }
+.b-label  { pointer-events: none; user-select: none; }
+.b-trail  { pointer-events: none; }
+.b-line   { pointer-events: none; }
+
+/* State color legend */
+.bubble-state-legend {
+  display:               grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap:        0.4rem;
+  margin-top: 0.8rem;
+}
+.bubble-state-legend .legend-item { cursor: default; }
 /* ── 12. Scrollbar ───────────────────────────────────────────────────── */
 ::-webkit-scrollbar       { width: 6px; height: 6px; }
 ::-webkit-scrollbar-track { background: var(--bg); }
