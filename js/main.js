@@ -32,12 +32,12 @@ function initApp() {
 
         
   buildStatCards();
-  initBirthDeathChart();     // was: drawBirthDeathChart()
-  buildLegend();              // was: selectTopCauses() — initialises legend + wires causesChanged event
-  initCauseTrendsChart();    // was: drawCauseChart()
-  initBarChartRace();        // was: initBarRace()
-  initSankeyChart();         // was: drawSankey()
-  //initMapChart();
+  initBirthDeathChart();     
+  buildLegend();            
+  initCauseTrendsChart();  
+  initBarChartRace();       
+  initSankeyChart();         
+
   drawBubbleChart();
        // ← population vs deaths bubble chart
 
