@@ -241,6 +241,3 @@ function initChartScatterAge() {
     });
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-    setTimeout(initChartScatterAge, 500); 
-});

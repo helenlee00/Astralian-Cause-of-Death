@@ -37,8 +37,9 @@ function initApp() {
   initCauseTrendsChart();  
   initBarChartRace();       
   initSankeyChart();         
-
   drawBubbleChart();
+  initChartScatterAge();
+  
        // ← population vs deaths bubble chart
 
   /* ── Cross-chart EventBus subscriptions ──────────────────────── */
