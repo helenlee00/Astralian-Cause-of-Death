@@ -145,6 +145,21 @@
       <div id="chart-bubble"></div>
       <div class="bubble-state-legend" id="bubble-legend"></div>
     </div>
+    <!-- 7. Categorical Scatter Plot (Age vs Causes) -->
+    <div class="panel">
+      <div class="panel-header">
+        <div>
+          <div class="section-title">Major Causes of Death by Age Group (2024)</div>
+          <div class="section-desc">Categorical scatter plot showing leading diseases across different age brackets</div>
+        </div>
+        <div class="btn-group">
+          <select id="scatter-state-select" class="btn" style="background: transparent; cursor: pointer;">
+          </select>
+        </div>
+      </div>
+      
+      <div id="chart-scatter-age" style="width: 100%; height: 500px; position: relative;"></div>
+    </div>
 
   </main>
 
@@ -167,6 +182,7 @@
   <script src="js/chartSankey.js"></script>
 
   <script src="js/chartBubble.js"></script>
+  <script src="js/chartScatterAge.js"></script>
   <script src="js/main.js"></script>
   
 </body>
