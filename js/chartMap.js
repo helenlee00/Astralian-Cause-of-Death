@@ -1,7 +1,7 @@
 /**
  * js/chartMap.js
  * The Choropleth map uses REAL data (Actual Data 2024) from ABS.
-*/
+
 function initMapChart() {
   const container = d3.select("#chart-map");
   if (container.empty()) return;
@@ -130,4 +130,4 @@ function initMapChart() {
     console.error("Error loading map GeoJSON: ", err);
     loadingText.text("⚠️ Failed to load map data.");
   });
-}
+} */
