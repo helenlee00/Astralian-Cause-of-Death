@@ -1,4 +1,40 @@
 Year,State,Age,Cause,Death_Count
+2024,Australian Capital Territory,25–34 years,Poisonings,5
+2024,Australian Capital Territory,25–34 years,Self-harm,9
+2024,Australian Capital Territory,35–44 years,Cirrhosis and other chronic liver diseases,5
+2024,Australian Capital Territory,35–44 years,Self-harm,8
+2024,Australian Capital Territory,45–54 years,Cardiovascular diseases,9
+2024,Australian Capital Territory,45–54 years,Cirrhosis and other chronic liver diseases,6
+2024,Australian Capital Territory,45–54 years,Neoplasms,16
+2024,Australian Capital Territory,45–54 years,Poisonings,6
+2024,Australian Capital Territory,45–54 years,Self-harm,7
+2024,Australian Capital Territory,55–64 years,Cardiovascular diseases,13
+2024,Australian Capital Territory,55–64 years,Cirrhosis and other chronic liver diseases,7
+2024,Australian Capital Territory,55–64 years,Neoplasms,63
+2024,Australian Capital Territory,55–64 years,Self-harm,7
+2024,Australian Capital Territory,65–74 years,Alzheimer's disease and other dementias,13
+2024,Australian Capital Territory,65–74 years,Cardiovascular diseases,38
+2024,Australian Capital Territory,65–74 years,Chronic respiratory diseases,17
+2024,Australian Capital Territory,65–74 years,Cirrhosis and other chronic liver diseases,11
+2024,Australian Capital Territory,65–74 years,Diabetes mellitus,16
+2024,Australian Capital Territory,65–74 years,Neoplasms,60
+2024,Australian Capital Territory,75–84 years,Alzheimer's disease and other dementias,88
+2024,Australian Capital Territory,75–84 years,Cardiovascular diseases,79
+2024,Australian Capital Territory,75–84 years,Chronic respiratory diseases,39
+2024,Australian Capital Territory,75–84 years,Diabetes mellitus,20
+2024,Australian Capital Territory,75–84 years,Neoplasms,93
+2024,Australian Capital Territory,85–94 years,Alzheimer's disease and other dementias,136
+2024,Australian Capital Territory,85–94 years,Cardiovascular diseases,122
+2024,Australian Capital Territory,85–94 years,Chronic respiratory diseases,33
+2024,Australian Capital Territory,85–94 years,Diabetes mellitus,20
+2024,Australian Capital Territory,85–94 years,Neoplasms,41
+2024,Australian Capital Territory,95 years and over,Alzheimer's disease and other dementias,46
+2024,Australian Capital Territory,95 years and over,Cardiovascular diseases,36
+2024,Australian Capital Territory,95 years and over,Chronic respiratory diseases,5
+2024,Australian Capital Territory,95 years and over,Diabetes mellitus,7
+2024,Australian Capital Territory,95 years and over,Lower respiratory infections,5
+2024,Australian Capital Territory,95 years and over,Neoplasms,5
+2024,Australian Capital Territory,Under 1 year,Neonatal disorders,11
 2024,New South Wales,15–24 years,Drowning,6
 2024,New South Wales,15–24 years,Interpersonal violence,9
 2024,New South Wales,15–24 years,Lower respiratory infections,6
@@ -56,6 +92,45 @@ Year,State,Age,Cause,Death_Count
 2024,New South Wales,95 years and over,Chronic respiratory diseases,181
 2024,New South Wales,95 years and over,Lower respiratory infections,179
 2024,New South Wales,Under 1 year,Neonatal disorders,111
+2024,Northern Territory,15–24 years,Road injuries,14
+2024,Northern Territory,15–24 years,Self-harm,15
+2024,Northern Territory,25–34 years,Road injuries,6
+2024,Northern Territory,25–34 years,Self-harm,19
+2024,Northern Territory,35–44 years,Cardiovascular diseases,11
+2024,Northern Territory,35–44 years,Diabetes mellitus,6
+2024,Northern Territory,35–44 years,Road injuries,6
+2024,Northern Territory,35–44 years,Self-harm,5
+2024,Northern Territory,45–54 years,Cardiovascular diseases,26
+2024,Northern Territory,45–54 years,Chronic respiratory diseases,6
+2024,Northern Territory,45–54 years,Cirrhosis and other chronic liver diseases,7
+2024,Northern Territory,45–54 years,Diabetes mellitus,12
+2024,Northern Territory,45–54 years,Neoplasms,6
+2024,Northern Territory,45–54 years,Poisonings,6
+2024,Northern Territory,45–54 years,Road injuries,10
+2024,Northern Territory,45–54 years,Self-harm,7
+2024,Northern Territory,55–64 years,Cardiovascular diseases,26
+2024,Northern Territory,55–64 years,Chronic respiratory diseases,10
+2024,Northern Territory,55–64 years,Cirrhosis and other chronic liver diseases,10
+2024,Northern Territory,55–64 years,Diabetes mellitus,22
+2024,Northern Territory,55–64 years,Neoplasms,26
+2024,Northern Territory,55–64 years,Road injuries,10
+2024,Northern Territory,65–74 years,Alzheimer's disease and other dementias,8
+2024,Northern Territory,65–74 years,Cardiovascular diseases,35
+2024,Northern Territory,65–74 years,Chronic respiratory diseases,18
+2024,Northern Territory,65–74 years,Diabetes mellitus,30
+2024,Northern Territory,65–74 years,Neoplasms,57
+2024,Northern Territory,75–84 years,Alzheimer's disease and other dementias,15
+2024,Northern Territory,75–84 years,Cardiovascular diseases,31
+2024,Northern Territory,75–84 years,Chronic respiratory diseases,25
+2024,Northern Territory,75–84 years,Diabetes mellitus,20
+2024,Northern Territory,75–84 years,Neoplasms,37
+2024,Northern Territory,85–94 years,Alzheimer's disease and other dementias,22
+2024,Northern Territory,85–94 years,Cardiovascular diseases,13
+2024,Northern Territory,85–94 years,Chronic respiratory diseases,6
+2024,Northern Territory,85–94 years,Diabetes mellitus,11
+2024,Northern Territory,85–94 years,Neoplasms,7
+2024,Northern Territory,95 years and over,Alzheimer's disease and other dementias,7
+2024,Northern Territory,Under 1 year,Neonatal disorders,13
 2024,Queensland,15–24 years,Drowning,6
 2024,Queensland,15–24 years,Interpersonal violence,8
 2024,Queensland,15–24 years,Neoplasms,5
@@ -157,6 +232,45 @@ Year,State,Age,Cause,Death_Count
 2024,South Australia,95 years and over,Chronic respiratory diseases,61
 2024,South Australia,95 years and over,Lower respiratory infections,60
 2024,South Australia,Under 1 year,Neonatal disorders,29
+2024,Tasmania,15–24 years,Road injuries,6
+2024,Tasmania,15–24 years,Self-harm,5
+2024,Tasmania,25–34 years,Poisonings,7
+2024,Tasmania,25–34 years,Self-harm,10
+2024,Tasmania,35–44 years,Poisonings,5
+2024,Tasmania,35–44 years,Self-harm,18
+2024,Tasmania,45–54 years,Cardiovascular diseases,26
+2024,Tasmania,45–54 years,Chronic respiratory diseases,9
+2024,Tasmania,45–54 years,Cirrhosis and other chronic liver diseases,16
+2024,Tasmania,45–54 years,Neoplasms,27
+2024,Tasmania,45–54 years,Poisonings,10
+2024,Tasmania,45–54 years,Road injuries,5
+2024,Tasmania,45–54 years,Self-harm,19
+2024,Tasmania,55–64 years,Cardiovascular diseases,68
+2024,Tasmania,55–64 years,Chronic respiratory diseases,29
+2024,Tasmania,55–64 years,Cirrhosis and other chronic liver diseases,14
+2024,Tasmania,55–64 years,Neoplasms,107
+2024,Tasmania,55–64 years,Self-harm,11
+2024,Tasmania,65–74 years,Alzheimer's disease and other dementias,28
+2024,Tasmania,65–74 years,Cardiovascular diseases,128
+2024,Tasmania,65–74 years,Chronic respiratory diseases,89
+2024,Tasmania,65–74 years,Diabetes mellitus,30
+2024,Tasmania,65–74 years,Neoplasms,198
+2024,Tasmania,75–84 years,Alzheimer's disease and other dementias,140
+2024,Tasmania,75–84 years,Cardiovascular diseases,226
+2024,Tasmania,75–84 years,Chronic respiratory diseases,113
+2024,Tasmania,75–84 years,Diabetes mellitus,58
+2024,Tasmania,75–84 years,Neoplasms,249
+2024,Tasmania,85–94 years,Alzheimer's disease and other dementias,258
+2024,Tasmania,85–94 years,Cardiovascular diseases,270
+2024,Tasmania,85–94 years,Chronic respiratory diseases,86
+2024,Tasmania,85–94 years,Diabetes mellitus,51
+2024,Tasmania,85–94 years,Lower respiratory infections,41
+2024,Tasmania,85–94 years,Neoplasms,57
+2024,Tasmania,95 years and over,Alzheimer's disease and other dementias,69
+2024,Tasmania,95 years and over,Cardiovascular diseases,74
+2024,Tasmania,95 years and over,Chronic respiratory diseases,12
+2024,Tasmania,95 years and over,Lower respiratory infections,11
+2024,Tasmania,Under 1 year,Neonatal disorders,17
 2024,Victoria,15–24 years,Drowning,8
 2024,Victoria,15–24 years,Interpersonal violence,7
 2024,Victoria,15–24 years,Neoplasms,15
