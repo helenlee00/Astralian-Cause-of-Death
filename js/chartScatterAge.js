@@ -111,7 +111,9 @@ function initChartScatterAge() {
             }
 
             const maxDeaths = d3.max(filteredData, d => d["Death_Count"]) || 1;
-            y.domain([0, maxDeaths * 1.15]);
+            
+            const bottomPadding = maxDeaths * -0.05; 
+            y.domain([bottomPadding, maxDeaths * 1.15]);
 
             yAxisGroup.transition().duration(800).call(d3.axisLeft(y).ticks(6).tickFormat(d3.format("~s")));
             xAxisGroup.transition().duration(800)
