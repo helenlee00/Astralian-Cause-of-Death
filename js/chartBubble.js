@@ -282,10 +282,10 @@ function _renderBubbleFrame(g) {
       .attr('fill', d => STATE_COLORS(d.state))
       
       
-      .style('mix-blend-mode', 'screen')
+      .style('mix-blend-mode', 'normal')
       .attr('opacity', d => {
         const age = _bubbleYear - d.year;
-        return Math.max(0.015, 0.08 - age * 0.002);
+        return Math.max(0.5, 0.5 - age * 0.002);
       })
       .attr('pointer-events', 'none'),
 
@@ -295,7 +295,7 @@ function _renderBubbleFrame(g) {
       .attr('r', d => _bubbleR(d.population))
       .attr('opacity', d => {
         const age = _bubbleYear - d.year;
-        return Math.max(0.0015, 0.08 - age * 0.002);
+        return Math.max(0.5, 0.5 - age * 0.002);
       }),
 
     exit => exit.remove()
