@@ -266,23 +266,40 @@ function _renderBubbleFrame(g) {
   const trailYears = d3.range(BUBBLE_MIN_YEAR, _bubbleYear);
 
   g.select('.bubble-trails')
-    .selectAll('.b-trail')
-    .data(_bubbleTrail ? trailYears.flatMap(y => _getBubbleData(y)) : [], d => `${d.state}-${d.year}`)
-    .join(
-      enter => enter.append('circle')
-        .attr('class', 'b-trail')
-        .attr('cx', d => _bubbleX(d.population))
-        .attr('cy', d => _bubbleY(d.deaths))
-        .attr('r',  d => Math.max(2, _bubbleR(d.population) * 0.45))
-        .attr('fill', d => STATE_COLORS(d.state))
-        .attr('opacity', d => {
-          const age = _bubbleYear - d.year;
-          return Math.max(0.04, 0.35 - age * 0.01);
-        })
-        .attr('pointer-events', 'none'),
-      update => update,
-      exit   => exit.remove()
-    );
+  .selectAll('.b-trail')
+  .data(
+    _bubbleTrail
+      ? trailYears.flatMap(y => _getBubbleData(y))
+      : [],
+    d => `${d.state}-${d.year}`
+  )
+  .join(
+    enter => enter.append('circle')
+      .attr('class', 'b-trail')
+      .attr('cx', d => _bubbleX(d.population))
+      .attr('cy', d => _bubbleY(d.deaths))
+      .attr('r', d => _bubbleR(d.population))
+      .attr('fill', d => STATE_COLORS(d.state))
+      
+      
+      .style('mix-blend-mode', 'screen')
+      .attr('opacity', d => {
+        const age = _bubbleYear - d.year;
+        return Math.max(0.015, 0.08 - age * 0.002);
+      })
+      .attr('pointer-events', 'none'),
+
+    update => update
+      .attr('cx', d => _bubbleX(d.population))
+      .attr('cy', d => _bubbleY(d.deaths))
+      .attr('r', d => _bubbleR(d.population))
+      .attr('opacity', d => {
+        const age = _bubbleYear - d.year;
+        return Math.max(0.0015, 0.08 - age * 0.002);
+      }),
+
+    exit => exit.remove()
+  );
 
   /* ── Trail connector lines ────────────────────────────────────── */
   if (_bubbleTrail) {
