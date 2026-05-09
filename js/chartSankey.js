@@ -31,16 +31,15 @@ function initSankeyChart() {
   container.innerHTML = '';
   _skG = null;
 
-  container.style.overflowX = "auto";
+  container.style.overflowX = "hidden";
   container.style.overflowY = "hidden";
 
   _skTopCauses = _getTopCauses();
 
   const ML = 180, MR = 180, MT = 36, MB = 32; 
   
-  const baseW = container.clientWidth || 900;
-  const W  = Math.max(baseW, 1500); 
-  const w  = W - ML - MR;
+  const W  = container.clientWidth || 900; 
+  const w  = Math.max(W - ML - MR, 100); 
   const H  = SK_CHART_H + MT + MB;
 
   /* ── SVG ─────────────────────────────────────────────────────────── */

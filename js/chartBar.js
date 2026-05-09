@@ -47,15 +47,15 @@ function initBarChartRace() {
     .attr("transform", `translate(${margin.left},${margin.top})`);
   const bigYearLabel = g.append("text")
     .attr("class", "big-year-label")
-    .attr("x", w)             // Căn lề phải của biểu đồ
-    .attr("y", h)             // Căn lề dưới của biểu đồ
+    .attr("x", w)             
+    .attr("y", h)             
     .attr("text-anchor", "end")
-    .attr("fill", "#ffffff")  // Màu trắng (hoặc màu text chính của bạn)
-    .style("opacity", 0.5)    // Độ mờ thấp để làm hình mờ (watermark)
-    .style("font-size", "100px") // Kích thước rất to
+    .attr("fill", "#ffffff")  
+    .style("opacity", 0.5)    
+    .style("font-size", "100px") 
     .attr('font-family', 'Playfair Display, serif')
     .style("font-weight", "bold")
-    .text(years[0]);          // Khởi tạo năm đầu tiên
+    .text(years[0]);          
   const x = d3.scaleLinear().range([0, w]);
   const y = d3.scaleBand().range([0, h]).padding(0.15).domain(d3.range(topN));
 
