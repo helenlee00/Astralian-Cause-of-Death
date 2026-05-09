@@ -47,7 +47,6 @@ function initChartScatterAge() {
     const xAxisGroup = svg.append("g").attr("transform", `translate(0,${innerHeight})`);
     const yAxisGroup = svg.append("g");
 
-    // Khai báo biến lưu trạng thái lọc
     let activeDisease = null;
     let activeAge = null; 
 
@@ -130,7 +129,7 @@ function initChartScatterAge() {
                 .style("transition", "opacity 0.2s")
                 .on("click", function(event, clickedDisease) {
                     activeAge = null; 
-                    ageSelect.property("value", "All Ages"); // Reset dropdown tuổi
+                    ageSelect.property("value", "All Ages"); 
                     activeDisease = (activeDisease === clickedDisease) ? null : clickedDisease;
                     applyIsolateFilter();
                 })
@@ -165,7 +164,7 @@ function initChartScatterAge() {
                 .style("transition", "opacity 0.3s")
                 .on("click", function(event, d) {
                     activeAge = null;
-                    ageSelect.property("value", "All Ages"); // Reset dropdown tuổi
+                    ageSelect.property("value", "All Ages"); 
                     activeDisease = (activeDisease === d["Cause"]) ? null : d["Cause"];
                     applyIsolateFilter();
                 })
@@ -212,7 +211,7 @@ function initChartScatterAge() {
                 .text(d => d["Cause"].length > 22 ? d["Cause"].substring(0, 20) + "..." : d["Cause"])
                 .style("fill", d => colorScale(d["Cause"])).style("opacity", 1);
             
-            // --- KÍCH HOẠT SỰ KIỆN NÚT LỌC TUỔI CHUẨN XÁC ---
+            // --- ACTIVATE THE AGE FILTER EVENT ---
             ageSelect.on("change", function() {
                 const selectedVal = this.value;
                 activeDisease = null; // Xóa lọc bệnh nếu đang có
@@ -220,7 +219,7 @@ function initChartScatterAge() {
                 applyIsolateFilter(); 
             });
 
-            // --- CÁC HÀM XỬ LÝ HIGHLIGHT & LỌC ---
+            // --- HIGHLIGHTING & FILTERING FUNCTIONS ---
             function applyIsolateFilter() {
                 if (activeAge) {
                     const causesInAge = new Set(filteredData.filter(d => d["Age"] === activeAge).map(d => d["Cause"]));
