@@ -227,9 +227,10 @@ function drawBubbleChart() {
     .attr('class', 'bubble-year-text')
     .attr('x', w - 4).attr('y', h - 8)
     .attr('text-anchor', 'end')
-    .attr('fill', '#21262d')
+    .attr('fill', '#ffffff')
+    .attr('opacity', 0.5)
     .attr('font-family', 'Playfair Display, serif')
-    .attr('font-size', '64px').attr('font-weight', '900')
+    .attr('font-size', '100px').attr('font-weight', '900')
     .text(_bubbleYear);
 }
 
@@ -470,7 +471,7 @@ function _drawRegressionLine(g, allData, w, h) {
     .attr('x', _bubbleX(xMax) - 4)
     .attr('y', _bubbleY(yAtXmax) - 8)
     .attr('text-anchor', 'end')
-    .attr('fill', '#3d4450')
+    .attr('fill', '#eaeef6')
     .attr('font-size', '10px')
     .attr('font-family', 'DM Sans, sans-serif')
     .text('trend');

@@ -1,11 +1,6 @@
 /**
  * js/legend.js
- *
- * FIXED: merged Part-1 stubs with the real initLegend() implementation.
- * - initLegend()     builds the legend grid and subscribes to causesChanged
- * - selectTopCauses() now actually sets visibleCauses and emits causesChanged
- * - selectAllCauses() same
- * - clearCauses()    same
+ 
  */
 
 /** ── Public preset functions (called by Top 8 / All / Clear buttons) ── */

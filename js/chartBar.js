@@ -51,9 +51,9 @@ function initBarChartRace() {
     .attr("y", h)             // Căn lề dưới của biểu đồ
     .attr("text-anchor", "end")
     .attr("fill", "#ffffff")  // Màu trắng (hoặc màu text chính của bạn)
-    .style("opacity", 0.1)    // Độ mờ thấp để làm hình mờ (watermark)
+    .style("opacity", 0.5)    // Độ mờ thấp để làm hình mờ (watermark)
     .style("font-size", "100px") // Kích thước rất to
-    .attr('font-family', 'DM Sans, sans-serif')
+    .attr('font-family', 'Playfair Display, serif')
     .style("font-weight", "bold")
     .text(years[0]);          // Khởi tạo năm đầu tiên
   const x = d3.scaleLinear().range([0, w]);

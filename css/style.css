@@ -162,7 +162,7 @@ h1 span { color: var(--accent); }
   text-transform: uppercase; letter-spacing: 0.08em;
   font-weight: 600; margin-bottom: 0.5rem;
 }
-.stat-value { font-family: var(--font-display); font-size: 1.8rem; font-weight: 700; line-height: 1; }
+.stat-value { font-family: 'Inter', var(--font-body), sans-serif;; font-size: 1.8rem; font-weight: 700; line-height: 1; }
 .stat-value.blue  { color: var(--accent); }
 .stat-value.green { color: var(--green); }
 .stat-value.red   { color: var(--red); }

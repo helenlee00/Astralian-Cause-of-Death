@@ -9,7 +9,7 @@ function initChartScatterAge() {
     
     const margin = { top: 40, right: 30, bottom: 60, left: 50 };
     const innerWidth = width - margin.left - margin.right;
-    const innerHeight = height - margin.top - margin.bottom - 80; 
+    const innerHeight = height - margin.top - margin.bottom - 150; 
 
     // Create SVG
     const svg = d3.select("#chart-scatter-age")
