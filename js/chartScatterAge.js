@@ -32,39 +32,7 @@ function initChartScatterAge() {
 
     const tooltip = d3.select("#tooltip");
 
-    const diseaseColorMap = {
-        "Meningitis": "#5470C6",
-        "Neoplasms": "#FF6B6B",
-        "Fire, heat, and hot substances": "#48C9B0",
-        "Drowning": "#9B59B6",
-        "Interpersonal violence": "#F39C12",
-        "HIV/AIDS": "#F06292",
-        "Drug use disorders": "#4CAF50",
-        "Tuberculosis": "#E74C3C",
-        "Road injuries": "#5DADE2",
-        "Maternal disorders": "#AEDBCE",
-        "Lower respiratory infections": "#4ADE80",
-        "Neonatal disorders": "#F4D03F",
-        "Alcohol use disorders": "#C39BD3",
-        "Exposure to forces of nature": "#F5B7B1",
-        "Diarrheal diseases": "#82E0AA",
-        "Environmental heat and cold exposure": "#F6A242",
-        "Nutritional deficiencies": "#E066FF",
-        "Self-harm": "#72D3FE",
-        "Diabetes mellitus": "#2ECC71",
-        "Poisonings": "#E15959",
-        "Protein-energy malnutrition": "#89B4E3",
-        "Cardiovascular diseases": "#4DA6FF",
-        "Chronic kidney disease": "#C0392B",
-        "Chronic respiratory diseases": "#27AE60",
-        "Cirrhosis and other chronic liver diseases": "#B8860B",
-        "Digestive diseases": "#AB82FF",
-        "Acute hepatitis": "#E67E22",
-        "Alzheimer's disease and other dementias": "#FF66B2",
-        "Parkinson's disease": "#1E8449"
-    };
-
-    const colorScale = d => diseaseColorMap[d] || "#888888";
+    const colorScale = d => (typeof CAUSE_COLORS === "function") ? CAUSE_COLORS(d) : "#888888";
 
     const ageOrder = [
         "Under 1 year", "1–14 years", "15–24 years", "25–34 years", 
@@ -80,6 +48,7 @@ function initChartScatterAge() {
     const yAxisGroup = svg.append("g");
 
     let activeDisease = null;
+    let activeAge = null; 
 
     // Get data
     d3.csv("data/Australia_Deaths_By_Age_2024.csv").then(data => {
@@ -89,9 +58,16 @@ function initChartScatterAge() {
         const select = d3.select("#scatter-state-select");
         select.selectAll("option").data(states).enter()
             .append("option").text(d => d).attr("value", d => d);
+        
+        const ageOptions = ["All Ages", ...ageOrder];
+        const ageSelect = d3.select("#scatter-age-select");
+        ageSelect.selectAll("option").data(ageOptions).enter()
+            .append("option").text(d => d).attr("value", d => d);
 
         function updateScatterChart(selectedState) {
             activeDisease = null; 
+            activeAge = null;
+            ageSelect.property("value", "All Ages"); 
 
             let filteredData;
 
@@ -116,9 +92,27 @@ function initChartScatterAge() {
             y.domain([bottomPadding, maxDeaths * 1.15]);
 
             yAxisGroup.transition().duration(800).call(d3.axisLeft(y).ticks(6).tickFormat(d3.format("~s")));
+            
             xAxisGroup.transition().duration(800)
                 .call(d3.axisBottom(x)).selectAll("text").style("text-anchor", "end")
                 .attr("dx", "-.8em").attr("dy", ".15em").attr("transform", "rotate(-35)");
+            
+            xAxisGroup.selectAll(".tick")
+                .style("cursor", "pointer")
+                .on("click", function(event, age) {
+                    activeDisease = null; 
+                    activeAge = (activeAge === age) ? null : age;
+                    
+                    ageSelect.property("value", activeAge ? activeAge : "All Ages");
+                    applyIsolateFilter();
+                })
+                .on("mouseover", function(event, age) {
+                    if (!activeDisease && !activeAge) highlightAge(age);
+                })
+                .on("mouseout", function() {
+                    if (!activeDisease && !activeAge) resetHighlight();
+                });
+
             yGrid.transition().duration(800).call(d3.axisLeft(y).ticks(6).tickSize(-innerWidth).tickFormat(""));
 
             // ------------------ CREATE DYNAMIC LEGEND ------------------
@@ -134,14 +128,16 @@ function initChartScatterAge() {
                 .style("font-size", "12px").style("color", "var(--muted)").style("cursor", "pointer")
                 .style("transition", "opacity 0.2s")
                 .on("click", function(event, clickedDisease) {
+                    activeAge = null; 
+                    ageSelect.property("value", "All Ages"); 
                     activeDisease = (activeDisease === clickedDisease) ? null : clickedDisease;
                     applyIsolateFilter();
                 })
                 .on("mouseover", function(event, hoveredDisease) {
-                    if (!activeDisease) highlightDisease(hoveredDisease);
+                    if (!activeDisease && !activeAge) highlightDisease(hoveredDisease);
                 })
                 .on("mouseout", function() {
-                    if (!activeDisease) resetHighlight();
+                    if (!activeDisease && !activeAge) resetHighlight();
                 });
 
             legendItems.append("span")
@@ -167,11 +163,13 @@ function initChartScatterAge() {
                 .style("cursor", "pointer")
                 .style("transition", "opacity 0.3s")
                 .on("click", function(event, d) {
+                    activeAge = null;
+                    ageSelect.property("value", "All Ages"); 
                     activeDisease = (activeDisease === d["Cause"]) ? null : d["Cause"];
                     applyIsolateFilter();
                 })
                 .on("mouseover", function(event, d) {
-                    if (!activeDisease) highlightDisease(d["Cause"]);
+                    if (!activeDisease && !activeAge) highlightDisease(d["Cause"]);
                     
                     tooltip.transition().duration(200).style("opacity", 1);
                     tooltip.html(`
@@ -181,7 +179,7 @@ function initChartScatterAge() {
                     `).style("left", (event.pageX + 15) + "px").style("top", (event.pageY - 28) + "px");
                 })
                 .on("mouseout", function() {
-                    if (!activeDisease) resetHighlight();
+                    if (!activeDisease && !activeAge) resetHighlight();
                     tooltip.transition().duration(500).style("opacity", 0);
                 });
 
@@ -213,11 +211,27 @@ function initChartScatterAge() {
                 .text(d => d["Cause"].length > 22 ? d["Cause"].substring(0, 20) + "..." : d["Cause"])
                 .style("fill", d => colorScale(d["Cause"])).style("opacity", 1);
             
+            // --- ACTIVATE THE AGE FILTER EVENT ---
+            ageSelect.on("change", function() {
+                const selectedVal = this.value;
+                activeDisease = null; // Xóa lọc bệnh nếu đang có
+                activeAge = selectedVal === "All Ages" ? null : selectedVal;
+                applyIsolateFilter(); 
+            });
+
+            // --- HIGHLIGHTING & FILTERING FUNCTIONS ---
             function applyIsolateFilter() {
-                if (activeDisease) {
+                if (activeAge) {
+                    const causesInAge = new Set(filteredData.filter(d => d["Age"] === activeAge).map(d => d["Cause"]));
+                    svg.selectAll(".scatter-bubble").style("opacity", c => c["Age"] === activeAge ? 1 : 0.05).attr("stroke-width", c => c["Age"] === activeAge ? 4.5 : 2.5);
+                    legendDiv.selectAll(".legend-item").style("opacity", l => causesInAge.has(l) ? 1 : 0.2);
+                    svg.selectAll(".top-cause-label").transition().duration(200).style("opacity", l => l["Age"] === activeAge ? 1 : 0);
+                    xAxisGroup.selectAll(".tick text").style("opacity", t => t === activeAge ? 1 : 0.3).style("font-weight", t => t === activeAge ? "bold" : "normal");
+                } else if (activeDisease) {
                     svg.selectAll(".scatter-bubble").style("opacity", c => c["Cause"] === activeDisease ? 1 : 0.05).attr("stroke-width", c => c["Cause"] === activeDisease ? 4.5 : 2.5);
                     legendDiv.selectAll(".legend-item").style("opacity", l => l === activeDisease ? 1 : 0.2);
                     svg.selectAll(".top-cause-label").transition().duration(200).style("opacity", l => l["Cause"] === activeDisease ? 1 : 0);
+                    xAxisGroup.selectAll(".tick text").style("opacity", 1).style("font-weight", "normal");
                 } else {
                     resetHighlight();
                 }
@@ -229,10 +243,19 @@ function initChartScatterAge() {
                 svg.selectAll(".top-cause-label").style("opacity", l => l["Cause"] === diseaseName ? 1 : 0.1);
             }
 
+            function highlightAge(ageName) {
+                const causesInAge = new Set(filteredData.filter(d => d["Age"] === ageName).map(d => d["Cause"]));
+                svg.selectAll(".scatter-bubble").style("opacity", c => c["Age"] === ageName ? 1 : 0.1).attr("stroke-width", c => c["Age"] === ageName ? 4.5 : 2.5);
+                legendDiv.selectAll(".legend-item").style("opacity", l => causesInAge.has(l) ? 1 : 0.2);
+                svg.selectAll(".top-cause-label").style("opacity", l => l["Age"] === ageName ? 1 : 0.1);
+                xAxisGroup.selectAll(".tick text").style("opacity", t => t === ageName ? 1 : 0.3);
+            }
+
             function resetHighlight() {
                 svg.selectAll(".scatter-bubble").style("opacity", 1).attr("stroke-width", 2.5);
                 legendDiv.selectAll(".legend-item").style("opacity", 1);
                 svg.selectAll(".top-cause-label").transition().duration(200).style("opacity", 1);
+                xAxisGroup.selectAll(".tick text").style("opacity", 1).style("font-weight", "normal");
             }
             
             applyIsolateFilter();
@@ -242,4 +265,3 @@ function initChartScatterAge() {
         select.on("change", function() { updateScatterChart(this.value); });
     });
 }
-

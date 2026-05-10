@@ -55,9 +55,16 @@ function _initConfig() {
   CAUSE_COLORS = d3.scaleOrdinal()
     .domain(Object.keys(DATA.causeTrends))
     .range([
+<<<<<<< HEAD
       '#f3f5f8', '#f85149', '#c5f5cb', '#6c4e0c', '#bc8cff', '#ffa657',
       '#e13bce', '#39d353', '#845c59', '#71a6d5', '#c0e4ff', '#13561b',
       '#e3b341', '#d6b8f5', '#ce7b74', '#44987f', '#ffd87dac', '#f4bde2',
       '#b1f0ff', '#ffdf5d', '#4ae168', '#852219', '#9ecbff', '#f0b27a',
+=======
+      '#58a6ff', '#f85149', '#3fb950', '#d29922', '#bc8cff', '#80410a',
+      '#f778ba', '#3f72e8', '#ff7b72', '#d829c6', '#a8daff', '#2a27cb',
+      '#e3b341', '#d2a8ff', '#ffa198', '#023106', '#ffb77d', '#ff96c5',
+      '#b1f0ff', '#ffdf5d', '#a0badc', '#8239e7', '#57d5eb', '#f0b27a',
+>>>>>>> 2aff5a9e5f498f2c8c98f93aa5a8abebf0aa8c25
     ]);
 }
