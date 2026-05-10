@@ -13,7 +13,7 @@
  *
  * Usage:
  *   EventBus.on('highlight', ({ cause }) => { ... });
- *   EventBus.emit('highlight', { cause: 'Neoplasms' });
+ *   EventBus.emit('highlight', { cause: 'Neoplasms' }); 
  *   EventBus.emit('highlight', { cause: null });  // clear
  */
 

@@ -41,7 +41,7 @@ async function loadData() {
       // Population CSV uses semicolons as delimiter
       d3.dsv(';', 'data/Australia_Population.csv'),
       d3.csv('data/Australia_Deaths_Long_Cleaned.csv'),
-      d3.dsv(';', 'data/population.csv'),
+      d3.csv('data/population.csv'),
     ]);
 
     window.DATA = {

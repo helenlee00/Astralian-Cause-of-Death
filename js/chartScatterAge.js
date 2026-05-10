@@ -7,7 +7,7 @@ function initChartScatterAge() {
     const width = container.clientWidth;
     const height = 550; 
     
-    const margin = { top: 40, right: 30, bottom: 60, left: 50 };
+    const margin = { top: 40, right: 30, bottom: 90, left: 60 };
     const innerWidth = width - margin.left - margin.right;
     const innerHeight = height - margin.top - margin.bottom - 150; 
 

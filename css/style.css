@@ -318,7 +318,10 @@ footer {
 .b-label  { pointer-events: none; user-select: none; }
 .b-trail  { pointer-events: none; }
 .b-line   { pointer-events: none; }
-
+#chart-scatter-age {
+    overflow: visible; /* hoặc overflow: auto nếu muốn scroll */
+    height: auto;      /* bỏ fixed height nếu có */
+}
 /* State color legend */
 .bubble-state-legend {
   display:               grid;

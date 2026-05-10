@@ -63,12 +63,12 @@ const STATE_ABBR = {
 const STATE_COLORS = d3.scaleOrdinal()
   .domain(STATES_LIST)
   .range([
-    '#58a6ff',  // ACT — blue
+    '#0b2dd5ff',  // ACT — blue
     '#f85149',  // NSW — red
     '#ffa657',  // NT  — orange
     '#3fb950',  // QLD — green
     '#d29922',  // SA  — gold
-    '#79c0ff',  // TAS — light blue
+    '#fff758ff',  // TAS — light blue
     '#bc8cff',  // VIC — purple
     '#f778ba',  // WA  — pink
   ]);
