@@ -33,6 +33,24 @@ function initCauseTrendsChart() {
   const yAxisGroup = axisG.append("g")
     .attr("transform", `translate(${MARGIN.standard.left},0)`)
     .attr("color", "#7d8590");
+  
+    /* ── Axis Labels ────────────────────────────────────────────── */
+  axisG.append("text")
+    .attr("x", MARGIN.standard.left + (width - MARGIN.standard.left - MARGIN.standard.right) / 2)
+    .attr("y", height - 5) 
+    .attr("text-anchor", "middle")
+    .attr("fill", "#7d8590")
+    .style("font-size", "12px")
+    .text("Year");
+
+  axisG.append("text")
+    .attr("transform", "rotate(-90)")
+    .attr("x", -(height / 2))
+    .attr("y", MARGIN.standard.left - 55) 
+    .attr("text-anchor", "middle")
+    .attr("fill", "#7d8590")
+    .style("font-size", "12px")
+    .text("Number of Deaths");
 
   const line = d3.line()
     .x(d => x(d.year))

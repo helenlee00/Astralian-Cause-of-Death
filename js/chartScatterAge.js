@@ -47,6 +47,26 @@ function initChartScatterAge() {
     const xAxisGroup = svg.append("g").attr("transform", `translate(0,${innerHeight})`);
     const yAxisGroup = svg.append("g");
 
+    /* ── Axis Labels ────────────────────────────────────────────── */
+    svg.append("text")
+        .attr("class", "axis-label")
+        .attr("x", innerWidth / 2)
+        .attr("y", innerHeight + margin.bottom - 25) 
+        .attr("text-anchor", "middle")
+        .attr("fill", "#7d8590")
+        .style("font-size", "12px")
+        .text("Age Group");
+
+    svg.append("text")
+        .attr("class", "axis-label")
+        .attr("transform", "rotate(-90)")
+        .attr("x", -innerHeight / 2)
+        .attr("y", -margin.left + 15) 
+        .attr("text-anchor", "middle")
+        .attr("fill", "#7d8590")
+        .style("font-size", "12px")
+        .text("Number of Deaths");
+
     let activeDisease = null;
     let activeAge = null; 
 

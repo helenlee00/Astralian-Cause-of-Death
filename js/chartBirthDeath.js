@@ -70,6 +70,23 @@ function initBirthDeathChart() {
     .call(d3.axisLeft(y).tickFormat(d => (d / 1000).toFixed(0) + 'K').ticks(5))
     .call(_styleAxis);
 
+  /* ── Axis Labels ────────────────────────────────────────────── */
+  g.append('text')
+    .attr('x', w / 2)
+    .attr('y', h + margin.bottom ) 
+    .attr('text-anchor', 'middle')
+    .attr('fill', '#7d8590')
+    .style('font-size', '12px')
+    .text('Year');
+
+  g.append('text')
+    .attr('transform', 'rotate(-90)')
+    .attr('x', -h / 2)
+    .attr('y', -margin.left + 15)
+    .attr('text-anchor', 'middle')
+    .attr('fill', '#7d8590')
+    .style('font-size', '12px')
+    .text('Total Count');
   /* ── Series groups — stored in module-level vars ─────────────────── */
   _birthsGroup = g.append('g').attr('class', 'series-births');
   _deathsGroup = g.append('g').attr('class', 'series-deaths');
