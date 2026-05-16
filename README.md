@@ -10,7 +10,8 @@ An interactive data visualization dashboard built with **D3.js v7** exploring Au
 - **Births vs. Deaths** — Dual line chart with animated drawing, switchable view modes (Both / Births / Deaths)
 - **Cause of Death Trends** — Multi-line chart for 30+ causes (1990–2019), togglable via legend
 - **Top Causes by Year** — Animated horizontal bar chart with a year slider (1990–2019)
--
+- **Population and Death Count State** - Relative between population and death count in state of Australia
+- **Scatter Age** - Major cause of death in age grouping
 - **Stat Cards** — Key metrics at a glance (latest births, deaths, natural increase, growth)
 - **Interactive Tooltips** — Hover anywhere on charts for detailed year-by-year data
 - **Responsive** — Redraws on window resize
@@ -36,10 +37,13 @@ DSDV_PROJECT/
     ├── tooltip.js              # Reusable tooltip show/hide/move logic
     ├── statCards.js            # Header KPI stat cards renderer
     ├── legend.js               # Cause legend renderer + toggle logic
+    ├── event.js                # Synchronise interactions across independent chart modules
     ├── chartBirthDeath.js      # Line chart: Births vs Deaths (1981–2019)
     ├── chartCauseTrends.js     # Multi-line chart: Cause of death trends
     ├── charSankey.js.          # Flow chart : Flow of cause of death trends
     ├── chartBar.js             # Horizontal bar chart: Top causes by year
+    ├── charBubble.js                 
+    ├──  charScatterAge.js 
     └── main.js                 # App entry — init, event listeners, resize
 ```
 
